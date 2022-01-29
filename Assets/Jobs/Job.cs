@@ -16,7 +16,8 @@ namespace Jobs
         public string successMessage;
         public string failureMessage;
 
-        public JobReward reward;
+        public long cost;
+        public JobReward[] rewards;
         public int durationInHours;
         public int failureCooldownInHours;
 
@@ -26,8 +27,8 @@ namespace Jobs
         public GameObject billboard;
         
 
-        public bool IsEnabled => _disabledUntil <= GameState.Time.Value;
-        public bool IsUnlocked => unlockRequirements.All(x => x.IsMet());
+        private bool IsEnabled => GameState.Money >= cost && _disabledUntil <= GameState.Time.Value;
+        private bool IsUnlocked => unlockRequirements.All(x => x.IsMet());
 
         private DateTime _disabledUntil;
         private GameObject _billboardInstance;
@@ -83,17 +84,18 @@ namespace Jobs
             }
         }
 
-        public void Attempt()
+        private void Attempt()
         {
-            if (!IsEnabled) return; // TODO: Message
-
+            GameState.Money -= cost;
             GameState.SkipTimeForDuration(TimeSpan.FromHours(durationInHours));
 
             var success = successRequirements.All(x => x.Attempt());
             if (success)
             {
-                _billboardText.text = successMessage;
-                reward.Give();
+                foreach (var reward in rewards)
+                {
+                    reward.Give();
+                }
             }
             else
             {
@@ -142,6 +144,15 @@ namespace Jobs
                     break;
                 case RewardType.Love:
                     GameState.Love += value;
+                    break;
+                case RewardType.StrengthXp:
+                    GameState.Strength.Xp += value;
+                    break;
+                case RewardType.IntelligenceXp:
+                    GameState.Intelligence.Xp += value;
+                    break;
+                case RewardType.CharismaXp:
+                    GameState.Charisma.Xp += value;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

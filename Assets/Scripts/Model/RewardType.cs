@@ -4,5 +4,8 @@
     {
         Money,
         Love,
+        StrengthXp,
+        IntelligenceXp,
+        CharismaXp,
     }
 }
