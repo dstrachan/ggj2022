@@ -6,6 +6,7 @@ namespace Model
 {
     public class GameState
     {
+        public Time Time { get; } = new();
         public Skill Strength { get; } = new();
         public Skill Intelligence { get; } = new();
         public Skill Charisma { get; } = new();
@@ -35,6 +36,16 @@ namespace Model
             gameState ??= new GameState();
             gameState.InitEvents();
             return gameState;
+        }
+
+        public static GameState Reset()
+        {
+            if (File.Exists(DataFile))
+            {
+                File.Delete(DataFile);
+            }
+
+            return Load();
         }
 
         private void InitEvents()
