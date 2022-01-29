@@ -21,7 +21,8 @@ namespace Model
             }
         }
 
-        [JsonIgnore] public double Value => Math.Pow(Math.Log10(Xp + 1), 3) + 1;
+        [JsonIgnore]
+        public double Value => Math.Pow(Math.Log10(Xp + 1), 3) + 1;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
