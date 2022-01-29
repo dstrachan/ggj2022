@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5645845918392647258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4976972779666646240}
+  - component: {fileID: 8268074325481794373}
+  - component: {fileID: 6150490487817920399}
+  m_Layer: 0
+  m_Name: House_no4 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4976972779666646240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645845918392647258}
+  m_LocalRotation: {x: -0.49991274, y: -0.50008726, z: -0.49991274, w: 0.50008726}
+  m_LocalPosition: {x: 13.15, y: -0.48214817, z: 112}
+  m_LocalScale: {x: 0.014066245, y: 0.01381654, z: 0.9426308}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -89.98, y: -90, z: 0}
+--- !u!33 &8268074325481794373
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645845918392647258}
+  m_Mesh: {fileID: -4142219771195877799, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+--- !u!23 &6150490487817920399
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645845918392647258}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -876546973899608171, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: -7844147989696415979, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: 6257132736653093736, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: -7058556930169127844, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: -7138748146296350031, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: -2738925030146767021, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: 441916079295038247, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: 5899634273450260174, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: 4466449724093349992, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: 6444553149598482433, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: -1743071194112725845, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: 6377135734982813812, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: 4245069479995831160, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: 2300624998891711362, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: -6795052493357887544, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: 555174762662679797, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: -7674054210247145038, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: -6787706925262767100, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  - {fileID: -505113203008121359, guid: 209efa33370301a40a4b1deb0c55d4f8, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

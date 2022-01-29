@@ -1,40 +1,18 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 using Newtonsoft.Json;
 
 namespace Model
 {
-    public class Skill : INotifyPropertyChanged
+    public class Skill
     {
-        private long _xp;
-
-        public long Xp
-        {
-            get => _xp;
-            set
-            {
-                if (value == _xp) return;
-                _xp = value;
-                OnPropertyChanged();
-            }
-        }
+        public long Xp { get; set; }
 
         [JsonIgnore]
         public double Value => Math.Pow(Math.Log10(Xp + 1), 3) + 1;
 
         public void Reset()
         {
-            _xp = 0;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            Xp = 0;
         }
     }
 }

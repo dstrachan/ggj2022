@@ -14,7 +14,6 @@ public class PlayerSkills : MonoBehaviour
     public Button charismaButton;
 
     // Time
-    public TextMeshProUGUI timeValue;
     public Slider gameSpeedSlider;
 
     // Misc
@@ -24,9 +23,21 @@ public class PlayerSkills : MonoBehaviour
 
     private void Start()
     {
-        strengthButton.onClick.AddListener(() => GameState.Strength.Xp += 10);
-        intelligenceButton.onClick.AddListener(() => GameState.Intelligence.Xp += 10);
-        charismaButton.onClick.AddListener(() => GameState.Charisma.Xp += 10);
+        strengthButton.onClick.AddListener(() =>
+        {
+            GameState.Strength.Xp += 10;
+            GameState.Days.Value++;
+        });
+        intelligenceButton.onClick.AddListener(() =>
+        {
+            GameState.Intelligence.Xp += 10;
+            GameState.Days.Value++;
+        });
+        charismaButton.onClick.AddListener(() =>
+        {
+            GameState.Charisma.Xp += 10;
+            GameState.Days.Value++;
+        });
 
         gameSpeedSlider.onValueChanged.AddListener(value => GameState.Time.Factor = value);
 
@@ -38,7 +49,5 @@ public class PlayerSkills : MonoBehaviour
         strengthValue.text = $"{GameState.Strength.Value:n}";
         intelligenceValue.text = $"{GameState.Intelligence.Value:n}";
         charismaValue.text = $"{GameState.Charisma.Value:n}";
-
-        timeValue.text = $"{GameState.Time.Value:s}";
     }
 }

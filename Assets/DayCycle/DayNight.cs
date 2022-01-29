@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Model;
 using UnityEngine;
+using Time = UnityEngine.Time;
 
 public class DayNight : MonoBehaviour
 {
@@ -24,7 +26,7 @@ public class DayNight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainLight = GetComponent<Light>();
+        mainLight = GetComponentInChildren<Light>();
     }
 
     // Update is called once per frame
@@ -43,16 +45,13 @@ public class DayNight : MonoBehaviour
         RenderSettings.ambientLight = mainLight.color;
         
         RenderSettings.fogDensity = fogDensityCurve.Evaluate(dotDayTime) * fogScale;
+
+        var currentTime = GameState.Instance.Time.Value;
+
+        var position = transform.position;
         
-        if (dotDayTime > 0)
-        {
-            mainLight.transform.Rotate((180f / dayTimeSeconds * Vector3.up) * Time.deltaTime * _skySpeed);
-        }
-        else
-        {
-            mainLight.transform.Rotate((180f / nightTimeSeconds * Vector3.up) * Time.deltaTime * _skySpeed);
-        }
-        
+        transform.localRotation = Quaternion.Euler(new Vector3(position.x, position.y, (currentTime.Hour + currentTime.Minute/60f) * 15 + 180));
+
         if (Input.GetKeyDown(KeyCode.O)) _skySpeed *= 0.5f;
         if (Input.GetKeyDown(KeyCode.P)) _skySpeed *= 2f;
         
