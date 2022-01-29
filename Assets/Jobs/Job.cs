@@ -86,6 +86,8 @@ namespace Jobs
 
         private void Attempt()
         {
+            if (!IsEnabled) return; 
+
             GameState.Money -= cost;
             GameState.SkipTimeForDuration(TimeSpan.FromHours(durationInHours));
 

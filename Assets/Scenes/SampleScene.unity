@@ -340,7 +340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2066239141332374090, guid: 4ac147234c599874392a517f7edd816d, type: 3}
       propertyPath: failureMessage
-      value: You know if you are nark you have to tell me
+      value: You know if you are a nark you have to tell me
       objectReference: {fileID: 0}
     - target: {fileID: 2066239141332374090, guid: 4ac147234c599874392a517f7edd816d, type: 3}
       propertyPath: successMessage
