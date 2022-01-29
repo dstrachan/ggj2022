@@ -8,25 +8,37 @@ public class TimeWarp : MonoBehaviour
     public static bool TimeIsWarping = false;
     
     public int warpSpeed = 3600;
+
+    public void SkipUntil(DateTime endTime)
+    {
+        TimeIsWarping = true;
+        GameState.Instance.Time.Factor = warpSpeed;
+        StartCoroutine(nameof(Warp), endTime);
+    }
+
     public void SkipTimeForDuration(TimeSpan duration)
     {
         var currentTime = GameState.Instance.Time.Value;
         var endTime = currentTime.Add(duration);
         //throw new NotImplementedException();
 
-        TimeIsWarping = true;
-        GameState.Instance.Time.Factor = warpSpeed;
-        StartCoroutine(nameof(Warp), endTime);
+        if (!TimeIsWarping)
+        {
+            TimeIsWarping = true;
+            GameState.Instance.Time.Factor = warpSpeed;
+            StartCoroutine(nameof(Warp), endTime);
+        }
     }
     
     IEnumerator Warp(DateTime endTime)
     {
         while (GameState.Instance.Time.Value < endTime)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
         }
         
         GameState.Instance.Time.Factor = 1;
+        GameState.Instance.Time.Value = endTime;
         TimeIsWarping = false;
     }
 

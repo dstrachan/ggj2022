@@ -19,6 +19,11 @@ namespace Model
                 _prevTime = currTime;
                 return _gameTime;
             }
+            set
+            {
+                _prevTime = DateTime.UtcNow;
+                _gameTime = value;
+            }
         }
 
         [JsonIgnore]
