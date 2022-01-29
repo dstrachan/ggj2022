@@ -5,8 +5,10 @@ namespace Model
 {
     public class Time
     {
-        private DateTime _prevTime;
-        private DateTime _gameTime;
+        public static readonly DateTime FirstDay = new(2000, 1, 1, 8, 0, 0);
+
+        private DateTime _prevTime = DateTime.UtcNow;
+        private DateTime _gameTime = FirstDay;
 
         public DateTime Value
         {
@@ -22,15 +24,16 @@ namespace Model
         [JsonIgnore]
         public float Factor { get; set; } = 1;
 
-        public Time()
+        public void SetDays(int days)
         {
-            Reset();
+            _prevTime = DateTime.UtcNow;
+            _gameTime = FirstDay.Add(TimeSpan.FromDays(days));
         }
 
         public void Reset()
         {
             _prevTime = DateTime.UtcNow;
-            _gameTime = new DateTime(2000, 1, 1);
+            _gameTime = FirstDay;
         }
     }
 }
