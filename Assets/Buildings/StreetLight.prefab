@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6277962068111626341}
-  m_LocalRotation: {x: 0.9674986, y: 0.000000029802322, z: -0.25287655, w: -0.000000059604645}
+  m_LocalRotation: {x: 0.98761725, y: 0.000000014901163, z: -0.15688251, w: -0.00000017881396}
   m_LocalPosition: {x: -0.933, y: -0.005, z: 7.805}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6266484719938550479}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 180, y: 29.296005, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 18.052002, z: 0}
 --- !u!108 &8610583354010362306
 Light:
   m_ObjectHideFlags: 0
@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 6266484719938550479}
   - component: {fileID: 7014599633097110890}
   - component: {fileID: 5096995583466815904}
+  - component: {fileID: 1469290224700621605}
   m_Layer: 0
   m_Name: StreetLight
   m_TagString: Untagged
@@ -119,7 +120,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6754508880944423029}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 3.0063343, y: -0.48215103, z: 71.224945}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -127,7 +128,7 @@ Transform:
   - {fileID: 6882456154490910524}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &7014599633097110890
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -178,3 +179,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1469290224700621605
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754508880944423029}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5383991, y: 0.42000026, z: 8.119999}
+  m_Center: {x: 0.050800502, y: -0.00000011933393, z: 4.059999}
