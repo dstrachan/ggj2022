@@ -16,28 +16,38 @@ namespace Model
         {
         }
 
-        public void Save()
-        {
-            var json = JsonConvert.SerializeObject(this, Formatting.Indented);
-            File.WriteAllText(DataFile, json);
-        }
-
         public static GameState Load()
         {
+            GameState gameState = null;
             if (File.Exists(DataFile))
             {
                 var json = File.ReadAllText(DataFile);
                 try
                 {
-                    return JsonConvert.DeserializeObject<GameState>(json);
+                    gameState = JsonConvert.DeserializeObject<GameState>(json);
                 }
                 catch
                 {
-                    return new GameState();
+                    // ignored
                 }
             }
 
-            return new GameState();
+            gameState ??= new GameState();
+            gameState.InitEvents();
+            return gameState;
+        }
+
+        private void InitEvents()
+        {
+            Strength.PropertyChanged += (_, _) => Save();
+            Intelligence.PropertyChanged += (_, _) => Save();
+            Charisma.PropertyChanged += (_, _) => Save();
+        }
+
+        private void Save()
+        {
+            var json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            File.WriteAllText(DataFile, json);
         }
 
         public override string ToString()

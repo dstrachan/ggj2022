@@ -287,6 +287,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1d22fde8f71b041a9808f316779c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strengthLabel: {fileID: 1415072495}
+  strengthButton: {fileID: 621783716}
+  intelligenceLabel: {fileID: 739492062}
+  intelligenceButton: {fileID: 498410985}
+  charismaLabel: {fileID: 1905787374}
+  charismaButton: {fileID: 1196149209}
 --- !u!4 &96197030
 Transform:
   m_ObjectHideFlags: 0
@@ -313,7 +319,7 @@ GameObject:
   - component: {fileID: 312198337}
   - component: {fileID: 312198338}
   m_Layer: 5
-  m_Name: Charisma
+  m_Name: Charisma Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -495,7 +501,7 @@ GameObject:
   - component: {fileID: 430982163}
   - component: {fileID: 430982165}
   m_Layer: 5
-  m_Name: Strength
+  m_Name: Strength Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -544,7 +550,7 @@ GameObject:
   - component: {fileID: 498410986}
   - component: {fileID: 498410985}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Intelligence Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,7 +773,7 @@ GameObject:
   - component: {fileID: 621783717}
   - component: {fileID: 621783716}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Strength Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -982,7 +988,7 @@ GameObject:
   - component: {fileID: 739492063}
   - component: {fileID: 739492062}
   m_Layer: 5
-  m_Name: Label
+  m_Name: Intelligence Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1348,7 +1354,7 @@ GameObject:
   - component: {fileID: 1196149210}
   - component: {fileID: 1196149209}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Charisma Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1469,7 +1475,7 @@ GameObject:
   - component: {fileID: 1415072496}
   - component: {fileID: 1415072495}
   m_Layer: 5
-  m_Name: Label
+  m_Name: Strength Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1603,7 +1609,7 @@ GameObject:
   - component: {fileID: 1617079387}
   - component: {fileID: 1617079388}
   m_Layer: 5
-  m_Name: Intelligence
+  m_Name: Intelligence Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1786,7 +1792,7 @@ GameObject:
   - component: {fileID: 1905787375}
   - component: {fileID: 1905787374}
   m_Layer: 5
-  m_Name: Label
+  m_Name: Charisma Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
