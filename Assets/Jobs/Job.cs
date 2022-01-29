@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Model;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,9 +9,9 @@ namespace Jobs
 {
     public class Job : MonoBehaviour
     {
-        public string title;
-        public string description;
         public string lockedMessage;
+        public string disabledMessage;
+        public string enabledMessage;
         public string successMessage;
         public string failureMessage;
 
@@ -21,20 +22,80 @@ namespace Jobs
         public JobRequirement[] unlockRequirements;
         public JobRequirement[] successRequirements;
 
+        public GameObject billboard;
+
+        public bool IsEnabled => _disabledUntil <= GameState.Time.Value;
         public bool IsUnlocked => unlockRequirements.All(x => x.IsMet());
 
-        public bool Attempt()
-        {
-            var success = successRequirements.All(x => x.Attempt());
+        private DateTime _disabledUntil;
+        private GameObject _billboardInstance;
+        private bool _canStartJob;
 
-            // TODO: Give rewards / set cooldown
-            if (success)
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag(Tags.Player))
             {
-                return true;
+                _canStartJob = IsUnlocked && IsEnabled;
+
+                _billboardInstance = Instantiate(billboard, transform);
+                _billboardInstance.transform.localPosition = new Vector3(0, 2, 0);
+                UpdateBillboard();
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.CompareTag(Tags.Player))
+            {
+                UpdateBillboard();
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.CompareTag(Tags.Player))
+            {
+                _canStartJob = false;
+                Destroy(_billboardInstance);
+            }
+        }
+
+        private void Update()
+        {
+            if (_canStartJob && Input.GetMouseButtonDown(0))
+            {
+                Attempt();
+                UpdateBillboard();
+            }
+        }
+
+        private void UpdateBillboard()
+        {
+            var billboardText = _billboardInstance.GetComponent<TextMeshPro>();
+            if (IsUnlocked)
+            {
+                billboardText.text = IsEnabled ? enabledMessage : disabledMessage;
             }
             else
             {
-                return false;
+                billboardText.text = lockedMessage;
+            }
+        }
+
+        public void Attempt()
+        {
+            if (!IsEnabled) return; // TODO: Message
+
+            GameState.SkipTimeForDuration(TimeSpan.FromHours(durationInHours));
+
+            var success = successRequirements.All(x => x.Attempt());
+            if (success)
+            {
+                reward.Give();
+            }
+            else
+            {
+                _disabledUntil = GameState.Time.Value.Add(TimeSpan.FromHours(failureCooldownInHours));
             }
         }
 
@@ -66,5 +127,22 @@ namespace Jobs
     {
         public RewardType type;
         public int value;
+
+        private static GameState GameState => GameState.Instance;
+
+        public void Give()
+        {
+            switch (type)
+            {
+                case RewardType.Money:
+                    GameState.Money += value;
+                    break;
+                case RewardType.Love:
+                    GameState.Love += value;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
     }
 }

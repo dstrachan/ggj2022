@@ -21,6 +21,8 @@ namespace Model
         public Skill Strength => _skills[SkillEnum.Strength];
         public Skill Intelligence => _skills[SkillEnum.Intelligence];
         public Skill Charisma => _skills[SkillEnum.Charisma];
+        public long Money { get; set; }
+        public long Love { get; set; }
 
         private static readonly string DataFile = $"{Application.persistentDataPath}/data.json";
 
@@ -36,8 +38,15 @@ namespace Model
             Strength.Reset();
             Intelligence.Reset();
             Charisma.Reset();
+            Money = 0;
+            Love = 0;
 
             Save();
+        }
+
+        public void SkipTimeForDuration(TimeSpan duration)
+        {
+            throw new NotImplementedException();
         }
 
         private static GameState Load()
