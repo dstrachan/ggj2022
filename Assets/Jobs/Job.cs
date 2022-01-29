@@ -15,7 +15,7 @@ namespace Jobs
         public string successMessage;
         public string failureMessage;
 
-        public JobReward reward;
+        public JobReward[] rewards;
         public int durationInHours;
         public int failureCooldownInHours;
 
@@ -91,7 +91,10 @@ namespace Jobs
             var success = successRequirements.All(x => x.Attempt());
             if (success)
             {
-                reward.Give();
+                foreach (var reward in rewards)
+                {
+                    reward.Give();
+                }
             }
             else
             {
@@ -139,6 +142,15 @@ namespace Jobs
                     break;
                 case RewardType.Love:
                     GameState.Love += value;
+                    break;
+                case RewardType.StrengthXp:
+                    GameState.Strength.Xp += value;
+                    break;
+                case RewardType.IntelligenceXp:
+                    GameState.Intelligence.Xp += value;
+                    break;
+                case RewardType.CharismaXp:
+                    GameState.Charisma.Xp += value;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
