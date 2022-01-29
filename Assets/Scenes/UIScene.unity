@@ -375,7 +375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 96197030}
   - component: {fileID: 96197029}
-  - component: {fileID: 96197031}
+  - component: {fileID: 96197032}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -409,7 +409,7 @@ MonoBehaviour:
   stealIdentitiesButton: {fileID: 1211607172}
   gameSpeedSlider: {fileID: 784290273}
   resetButton: {fileID: 449198823}
-  newTimeValue: {fileID: 1028800296}
+  timeValue: {fileID: 1028800296}
 --- !u!4 &96197030
 Transform:
   m_ObjectHideFlags: 0
@@ -425,7 +425,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &96197031
+--- !u!114 &96197032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -434,11 +434,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 96197028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 560a0e9d63f646d88005fde9b9f1fbe6, type: 3}
+  m_Script: {fileID: 11500000, guid: c557cc8c3610453d880a93b2e3b677ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lastSpeedFactor: 1
-  timeSpeedFactor: 1
+  title: 
+  description: 
+  lockedMessage: 
+  successMessage: 
+  failureMessage: 
+  reward:
+    type: 0
+    value: 0
+  durationInHours: 0
+  failureCooldownInHours: 0
+  unlockRequirements: []
+  successRequirements:
+  - skill: 0
+    value: 10
 --- !u!1 &187265371
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,7 +3012,7 @@ GameObject:
   - component: {fileID: 1028800297}
   - component: {fileID: 1028800296}
   m_Layer: 5
-  m_Name: Time Label
+  m_Name: Time Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

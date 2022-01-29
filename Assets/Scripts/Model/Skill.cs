@@ -24,6 +24,11 @@ namespace Model
         [JsonIgnore]
         public double Value => Math.Pow(Math.Log10(Xp + 1), 3) + 1;
 
+        public void Reset()
+        {
+            _xp = 0;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

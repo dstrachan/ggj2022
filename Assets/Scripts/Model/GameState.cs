@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -6,18 +8,39 @@ namespace Model
 {
     public class GameState
     {
+        private static readonly Lazy<GameState> Lazy = new(Load);
+
+        private readonly Dictionary<SkillEnum, Skill> _skills = new()
+        {
+            [SkillEnum.Strength] = new Skill(),
+            [SkillEnum.Intelligence] = new Skill(),
+            [SkillEnum.Charisma] = new Skill(),
+        };
+
         public Time Time { get; } = new();
-        public Skill Strength { get; } = new();
-        public Skill Intelligence { get; } = new();
-        public Skill Charisma { get; } = new();
+        public Skill Strength => _skills[SkillEnum.Strength];
+        public Skill Intelligence => _skills[SkillEnum.Intelligence];
+        public Skill Charisma => _skills[SkillEnum.Charisma];
 
         private static readonly string DataFile = $"{Application.persistentDataPath}/data.json";
+
+        public static GameState Instance => Lazy.Value;
 
         private GameState()
         {
         }
 
-        public static GameState Load()
+        public void Reset()
+        {
+            Time.Reset();
+            Strength.Reset();
+            Intelligence.Reset();
+            Charisma.Reset();
+
+            Save();
+        }
+
+        private static GameState Load()
         {
             GameState gameState = null;
             if (File.Exists(DataFile))
@@ -36,16 +59,6 @@ namespace Model
             gameState ??= new GameState();
             gameState.InitEvents();
             return gameState;
-        }
-
-        public static GameState Reset()
-        {
-            if (File.Exists(DataFile))
-            {
-                File.Delete(DataFile);
-            }
-
-            return Load();
         }
 
         private void InitEvents()

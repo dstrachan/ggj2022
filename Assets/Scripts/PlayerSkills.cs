@@ -1,3 +1,5 @@
+using System;
+using Jobs;
 using Model;
 using TMPro;
 using UnityEngine;
@@ -28,20 +30,21 @@ public class PlayerSkills : MonoBehaviour
     public Button resetButton;
 
     // Test
-    public TextMeshProUGUI newTimeValue;
+    public TextMeshProUGUI timeValue;
+    private Job _job;
 
-    private GameState _gameState;
+    private static GameState GameState => GameState.Instance;
 
     private void Awake()
     {
-        _gameState = GameState.Load();
+        _job = GetComponent<Job>();
     }
 
     private void Start()
     {
-        strengthButton.onClick.AddListener(() => _gameState.Strength.Xp++);
-        intelligenceButton.onClick.AddListener(() => _gameState.Intelligence.Xp++);
-        charismaButton.onClick.AddListener(() => _gameState.Charisma.Xp++);
+        strengthButton.onClick.AddListener(() => GameState.Strength.Xp++);
+        intelligenceButton.onClick.AddListener(() => GameState.Intelligence.Xp++);
+        charismaButton.onClick.AddListener(() => GameState.Charisma.Xp++);
 
         // carpetFactoryButton.onClick.AddListener(() => );
         // sellDrugsButton.onClick.AddListener(() => );
@@ -50,17 +53,25 @@ public class PlayerSkills : MonoBehaviour
         // robBankButton.onClick.AddListener(() => );
         // stealIdentitiesButton.onClick.AddListener(() => );
 
-        gameSpeedSlider.onValueChanged.AddListener(value => _gameState.Time.Factor = value);
+        gameSpeedSlider.onValueChanged.AddListener(value => GameState.Time.Factor = value);
 
-        resetButton.onClick.AddListener(() => _gameState = GameState.Reset());
+        resetButton.onClick.AddListener(() => GameState.Reset());
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _job.Attempt();
+        }
     }
 
     private void OnGUI()
     {
-        strengthValue.text = $"{_gameState.Strength.Value:n}";
-        intelligenceValue.text = $"{_gameState.Intelligence.Value:n}";
-        charismaValue.text = $"{_gameState.Charisma.Value:n}";
+        strengthValue.text = $"{GameState.Strength.Value:n}";
+        intelligenceValue.text = $"{GameState.Intelligence.Value:n}";
+        charismaValue.text = $"{GameState.Charisma.Value:n}";
 
-        newTimeValue.text = $"{_gameState.Time.Value:s}";
+        timeValue.text = $"{GameState.Time.Value:s}";
     }
 }

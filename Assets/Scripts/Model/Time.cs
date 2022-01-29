@@ -5,8 +5,8 @@ namespace Model
 {
     public class Time
     {
-        private DateTime _prevTime = DateTime.UtcNow;
-        private DateTime _gameTime = new(2000, 1, 1);
+        private DateTime _prevTime;
+        private DateTime _gameTime;
 
         public DateTime Value
         {
@@ -21,5 +21,16 @@ namespace Model
 
         [JsonIgnore]
         public float Factor { get; set; } = 1;
+
+        public Time()
+        {
+            Reset();
+        }
+
+        public void Reset()
+        {
+            _prevTime = DateTime.UtcNow;
+            _gameTime = new DateTime(2000, 1, 1);
+        }
     }
 }
