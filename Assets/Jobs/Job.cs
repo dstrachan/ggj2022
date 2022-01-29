@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace Jobs
 {
+    [RequireComponent(typeof(TimeWarp))]
     public class Job : MonoBehaviour
     {
         public string lockedMessage;
@@ -38,9 +39,12 @@ namespace Jobs
         private Button _acceptButton;
         private TextMeshPro _billboardText;
 
+        private TimeWarp _timeWarp;
+        
         private void Start()
         {
             _acceptButton = GameObject.FindGameObjectWithTag(Tags.JobAccept).GetComponent<Button>();
+            _timeWarp = GetComponent<TimeWarp>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -91,19 +95,21 @@ namespace Jobs
             if (!IsEnabled) return; 
 
             GameState.Money -= cost;
-            GameState.SkipTimeForDuration(TimeSpan.FromHours(durationInHours));
+            _timeWarp.SkipTimeForDuration(TimeSpan.FromHours(durationInHours));
 
             var success = successRequirements.All(x => x.Attempt());
             if (success)
             {
                 foreach (var reward in rewards)
                 {
+                    _billboardText.color = Color.green;
                     _billboardText.text = successMessage;
                     reward.Give();
                 }
             }
             else
             {
+                _billboardText.color = Color.red;
                 _billboardText.text = failureMessage;
                 _disabledUntil = GameState.Time.Value.Add(TimeSpan.FromHours(failureCooldownInHours));
             }

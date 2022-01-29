@@ -19,38 +19,40 @@ namespace Player
 
         void Update()
         {
-            var inputX = Input.GetAxis("Horizontal");
-            var inputY = Input.GetAxis("Vertical");
-            
-            var inputModifyFactor = (inputX != 0.0f && inputY != 0.0f) ? .7071f : 1.0f;
-
-
-            var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            var hits = Physics.RaycastAll(ray);
-            Vector3 groundHit = transform.position;
-            if (hits.Any())
+            if (!TimeWarp.TimeIsWarping)
             {
-                foreach (var hit in hits)
+                var inputX = Input.GetAxis("Horizontal");
+                var inputY = Input.GetAxis("Vertical");
+                
+                var inputModifyFactor = (inputX != 0.0f && inputY != 0.0f) ? .7071f : 1.0f;
+
+                var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                var hits = Physics.RaycastAll(ray);
+                Vector3 groundHit = transform.position;
+                if (hits.Any())
                 {
-                    if (hit.collider.CompareTag(Tags.Ground))
+                    foreach (var hit in hits)
                     {
-                        groundHit = hit.point;
-                        var transform1 = transform;
-                        transform.LookAt(new Vector3(hit.point.x, transform1.position.y, hit.point.z));
-                        break;
+                        if (hit.collider.CompareTag(Tags.Ground))
+                        {
+                            groundHit = hit.point;
+                            var transform1 = transform;
+                            transform.LookAt(new Vector3(hit.point.x, transform1.position.y, hit.point.z));
+                            break;
+                        }
                     }
                 }
-            }
-            
-            _moveDirection = new Vector3(inputX * inputModifyFactor, -1, inputY * inputModifyFactor);
-            _moveDirection = transform.TransformDirection(_moveDirection) * speed;
 
-            // Dont move too close to target and go crazy
-            if (Vector3.Distance(groundHit, transform.position) > 1.2f)
-            {
-                _controller.Move(_moveDirection * Time.deltaTime);
+                _moveDirection = new Vector3(inputX * inputModifyFactor, -1, inputY * inputModifyFactor);
+                _moveDirection = transform.TransformDirection(_moveDirection) * speed;
+
+                // Dont move too close to target and go crazy
+                if (Vector3.Distance(groundHit, transform.position) > 1.2f)
+                {
+                    _controller.Move(_moveDirection * Time.deltaTime);
+                }
             }
-            
+
         }
       
     }

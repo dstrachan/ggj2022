@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
@@ -47,14 +48,6 @@ namespace Model
 
             Save();
             Load();
-        }
-
-        public void SkipTimeForDuration(TimeSpan duration)
-        {
-            var currentTime = Time.Value;
-            var endTime = currentTime.Add(duration);
-            
-            //throw new NotImplementedException();
         }
 
         private static GameState Load()
