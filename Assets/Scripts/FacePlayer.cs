@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class FacePlayer : MonoBehaviour
 {
-    public GameObject Player;
+    private GameObject _player;
     
     // Start is called before the first frame update
     void Start()
     {
+        _player = GameObject.FindGameObjectWithTag(Tags.Player);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(Player.transform);
+        var position = _player.transform.position;
+        transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
     }
 }

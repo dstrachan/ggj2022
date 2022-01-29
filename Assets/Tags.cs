@@ -4,4 +4,5 @@
     public const string Player = "Player";
     public const string Camera = "Camera";
     public const string Job = "Job";
+    public const string JobAccept = "JobAccept";
 }

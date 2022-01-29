@@ -49,7 +49,7 @@ namespace Model
             var currentTime = Time.Value;
             var endTime = currentTime.Add(duration);
             
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private static GameState Load()

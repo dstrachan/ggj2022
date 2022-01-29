@@ -3,6 +3,7 @@ using System.Linq;
 using Model;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Jobs
@@ -23,6 +24,7 @@ namespace Jobs
         public JobRequirement[] successRequirements;
 
         public GameObject billboard;
+        
 
         public bool IsEnabled => _disabledUntil <= GameState.Time.Value;
         public bool IsUnlocked => unlockRequirements.All(x => x.IsMet());
@@ -31,26 +33,30 @@ namespace Jobs
         private GameObject _billboardInstance;
         private bool _canStartJob;
 
+        private Button _acceptButton;
+        private TextMeshPro _billboardText;
+
+        private void Start()
+        {
+            _acceptButton = GameObject.FindGameObjectWithTag(Tags.JobAccept).GetComponent<Button>();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag(Tags.Player))
             {
+                _acceptButton.onClick.RemoveAllListeners();
+                _acceptButton.onClick.AddListener(Attempt);
+                
                 _canStartJob = IsUnlocked && IsEnabled;
 
                 _billboardInstance = Instantiate(billboard, transform);
                 _billboardInstance.transform.localPosition = new Vector3(0, 2, 0);
+                _billboardText = _billboardInstance.GetComponent<TextMeshPro>();
                 UpdateBillboard();
             }
         }
-
-        private void OnTriggerStay(Collider other)
-        {
-            if (other.gameObject.CompareTag(Tags.Player))
-            {
-                UpdateBillboard();
-            }
-        }
-
+        
         private void OnTriggerExit(Collider other)
         {
             if (other.gameObject.CompareTag(Tags.Player))
@@ -62,23 +68,18 @@ namespace Jobs
 
         private void Update()
         {
-            if (_canStartJob && Input.GetMouseButtonDown(0))
-            {
-                Attempt();
-                UpdateBillboard();
-            }
+            _acceptButton.gameObject.SetActive(_canStartJob);
         }
 
         private void UpdateBillboard()
         {
-            var billboardText = _billboardInstance.GetComponent<TextMeshPro>();
             if (IsUnlocked)
             {
-                billboardText.text = IsEnabled ? enabledMessage : disabledMessage;
+                _billboardText.text = IsEnabled ? enabledMessage : disabledMessage;
             }
             else
             {
-                billboardText.text = lockedMessage;
+                _billboardText.text = lockedMessage;
             }
         }
 
@@ -91,10 +92,12 @@ namespace Jobs
             var success = successRequirements.All(x => x.Attempt());
             if (success)
             {
+                _billboardText.text = successMessage;
                 reward.Give();
             }
             else
             {
+                _billboardText.text = failureMessage;
                 _disabledUntil = GameState.Time.Value.Add(TimeSpan.FromHours(failureCooldownInHours));
             }
         }
