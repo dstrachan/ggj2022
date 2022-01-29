@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using UnityEngine;
 
 namespace Player
@@ -27,22 +28,21 @@ namespace Player
             var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.CompareTag("ground"))
+                if (hit.collider.CompareTag(Tags.Ground))
                 {
                     var transform1 = transform;
                     transform.LookAt(new Vector3(hit.point.x, transform1.position.y, hit.point.z));
                 }
             }
             
-            
             _moveDirection = new Vector3(inputX * inputModifyFactor, 0, inputY * inputModifyFactor);
             _moveDirection = transform.TransformDirection(_moveDirection) * speed;
 
-            if (Vector3.Distance(hit.point, transform.position) > 1.5f)
+            // Dont move too close to target and go crazy
+            if (Vector3.Distance(hit.point, transform.position) > 1.2f)
             {
                 _controller.Move(_moveDirection * Time.deltaTime);
             }
-
         }
       
     }
