@@ -15,6 +15,8 @@ namespace Jobs
         public string enabledMessage;
         public string successMessage;
         public string failureMessage;
+        
+        public string JobActionText;
 
         public long cost;
         public JobReward[] rewards;
@@ -48,6 +50,7 @@ namespace Jobs
             {
                 _acceptButton.onClick.RemoveAllListeners();
                 _acceptButton.onClick.AddListener(Attempt);
+                _acceptButton.GetComponentInChildren<TextMeshProUGUI>().text = JobActionText;
                 
                 _canStartJob = IsUnlocked && IsEnabled;
 
@@ -96,6 +99,7 @@ namespace Jobs
             {
                 foreach (var reward in rewards)
                 {
+                    _billboardText.text = successMessage;
                     reward.Give();
                 }
             }
