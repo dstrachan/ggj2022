@@ -17,7 +17,10 @@ namespace Model
             [SkillEnum.Charisma] = new Skill(),
         };
 
+        [JsonIgnore]
         public Time Time { get; } = new();
+
+        public Watchable<int> Days { get; } = new();
         public Skill Strength => _skills[SkillEnum.Strength];
         public Skill Intelligence => _skills[SkillEnum.Intelligence];
         public Skill Charisma => _skills[SkillEnum.Charisma];
@@ -35,6 +38,7 @@ namespace Model
         public void Reset()
         {
             Time.Reset();
+            Days.Reset();
             Strength.Reset();
             Intelligence.Reset();
             Charisma.Reset();
@@ -42,6 +46,7 @@ namespace Model
             Love = 0;
 
             Save();
+            Load();
         }
 
         public void SkipTimeForDuration(TimeSpan duration)
@@ -61,6 +66,10 @@ namespace Model
                 try
                 {
                     gameState = JsonConvert.DeserializeObject<GameState>(json);
+                    if (gameState.Days.Value > 0)
+                    {
+                        gameState.Time.SetDays(gameState.Days.Value);    
+                    }
                 }
                 catch
                 {
@@ -75,12 +84,11 @@ namespace Model
 
         private void InitEvents()
         {
-            Strength.PropertyChanged += (_, _) => Save();
-            Intelligence.PropertyChanged += (_, _) => Save();
-            Charisma.PropertyChanged += (_, _) => Save();
+            Days.PropertyChanged += (_, _) => Save();
         }
 
-        private void Save()
+        // TODO: Save at start of new day
+        public void Save()
         {
             var json = JsonConvert.SerializeObject(this, Formatting.Indented);
             File.WriteAllText(DataFile, json);
