@@ -15,6 +15,7 @@ namespace Jobs
         public string successMessage;
         public string failureMessage;
 
+        public long cost;
         public JobReward[] rewards;
         public int durationInHours;
         public int failureCooldownInHours;
@@ -24,8 +25,8 @@ namespace Jobs
 
         public GameObject billboard;
 
-        public bool IsEnabled => _disabledUntil <= GameState.Time.Value;
-        public bool IsUnlocked => unlockRequirements.All(x => x.IsMet());
+        private bool IsEnabled => GameState.Money >= cost && _disabledUntil <= GameState.Time.Value;
+        private bool IsUnlocked => unlockRequirements.All(x => x.IsMet());
 
         private DateTime _disabledUntil;
         private GameObject _billboardInstance;
@@ -82,10 +83,9 @@ namespace Jobs
             }
         }
 
-        public void Attempt()
+        private void Attempt()
         {
-            if (!IsEnabled) return; // TODO: Message
-
+            GameState.Money -= cost;
             GameState.SkipTimeForDuration(TimeSpan.FromHours(durationInHours));
 
             var success = successRequirements.All(x => x.Attempt());
