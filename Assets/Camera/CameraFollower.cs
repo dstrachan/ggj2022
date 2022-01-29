@@ -6,14 +6,13 @@ public class CameraFollower : MonoBehaviour
     //public float zoomedInPosition;
     public float zoomedOutPosition;
 
-    private float _smoothFactor;
+    public float smoothFactor = 2;
 
     private Transform _player;
     public Vector3 cameraOffset; 
 
     private void Start()
     {
-        _smoothFactor = 2;
         _player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<Transform>();
     }
 
@@ -35,7 +34,7 @@ public class CameraFollower : MonoBehaviour
         var cameraPosition = transform.position;
         
         var newPosition = playerPosition + cameraOffset;
-        cameraPosition = Vector3.Lerp(cameraPosition, newPosition, Time.deltaTime * _smoothFactor);
+        cameraPosition = Vector3.Lerp(cameraPosition, newPosition, Time.deltaTime * smoothFactor);
         transform.position = cameraPosition;
     }
 
