@@ -1295,6 +1295,7 @@ GameObject:
   - component: {fileID: 217961298375181250}
   - component: {fileID: 217961298375181253}
   - component: {fileID: 217961298375181248}
+  - component: {fileID: 7419361727157960203}
   m_Layer: 5
   m_Name: Stats Panel
   m_TagString: Untagged
@@ -1403,6 +1404,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &7419361727157960203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217961298375181255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef917562ad94464bb6c455baa6010f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strengthValue: {fileID: 217961298837271398}
+  strengthButton: {fileID: 217961297346534043}
+  intelligenceValue: {fileID: 217961297299817866}
+  intelligenceButton: {fileID: 217961297003366585}
+  charismaValue: {fileID: 217961297426121386}
+  charismaButton: {fileID: 217961298601775143}
 --- !u!1 &217961298379785932
 GameObject:
   m_ObjectHideFlags: 0
