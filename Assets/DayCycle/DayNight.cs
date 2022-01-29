@@ -50,9 +50,8 @@ public class DayNight : MonoBehaviour
 
         var position = transform.position;
         
-        transform.localRotation = Quaternion.Euler(new Vector3(position.x, position.y, (currentTime.Hour + currentTime.Minute/60f) * 15));
-        
-        
+        transform.localRotation = Quaternion.Euler(new Vector3(position.x, position.y, (currentTime.Hour + currentTime.Minute/60f) * 15 + 180));
+
         if (Input.GetKeyDown(KeyCode.O)) _skySpeed *= 0.5f;
         if (Input.GetKeyDown(KeyCode.P)) _skySpeed *= 2f;
         

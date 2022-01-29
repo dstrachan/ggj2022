@@ -28,7 +28,6 @@ namespace Jobs
 
         public GameObject billboard;
         
-
         private bool IsEnabled => GameState.Money >= cost && _disabledUntil <= GameState.Time.Value;
         private bool IsUnlocked => unlockRequirements.All(x => x.IsMet());
 
