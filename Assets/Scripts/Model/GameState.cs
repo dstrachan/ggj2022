@@ -46,6 +46,9 @@ namespace Model
 
         public void SkipTimeForDuration(TimeSpan duration)
         {
+            var currentTime = Time.Value;
+            var endTime = currentTime.Add(duration);
+            
             throw new NotImplementedException();
         }
 

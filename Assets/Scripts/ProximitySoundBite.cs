@@ -6,6 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using Time = UnityEngine.Time;
 
+[RequireComponent(typeof(AudioSource))]
 public class ProximitySoundBite : MonoBehaviour
 {
     public List<AudioClip> Sounds;
