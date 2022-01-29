@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class StatsSetter : MonoBehaviour
 {
+    public TextMeshProUGUI moneyValue;
+    public TextMeshProUGUI loveValue;
     public TextMeshProUGUI strengthValue;
     public Button strengthButton;
     public TextMeshProUGUI intelligenceValue;
@@ -21,6 +23,8 @@ public class StatsSetter : MonoBehaviour
 
     private void OnGUI()
     {
+        moneyValue.text = $"{GameState.Instance.Money:n0}";
+        loveValue.text = $"{GameState.Instance.Love:n0}";
         strengthValue.text = $"{GameState.Instance.Strength.Value:n}";
         intelligenceValue.text = $"{GameState.Instance.Intelligence.Value:n}";
         charismaValue.text = $"{GameState.Instance.Charisma.Value:n}";
