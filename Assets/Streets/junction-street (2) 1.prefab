@@ -474,6 +474,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2656348940722907593}
     m_Modifications:
+    - target: {fileID: 3171311269920115488, guid: 0996812ea808def47befd79bee15417e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fd8c6e9efce16d149a01273576d4cac3, type: 2}
     - target: {fileID: 3963799599304911605, guid: 0996812ea808def47befd79bee15417e, type: 3}
       propertyPath: m_Name
       value: junction-foundation

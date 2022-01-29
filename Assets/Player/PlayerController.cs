@@ -1,4 +1,4 @@
-using DefaultNamespace;
+using System.Linq;
 using UnityEngine;
 
 namespace Player
@@ -24,16 +24,21 @@ namespace Player
             
             var inputModifyFactor = (inputX != 0.0f && inputY != 0.0f) ? .7071f : 1.0f;
 
-            var ground = transform.position.y;
-            RaycastHit hit;
+
             var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            var hits = Physics.RaycastAll(ray);
+            Vector3 groundHit = transform.position;
+            if (hits.Any())
             {
-                if (hit.collider.CompareTag(Tags.Ground))
+                foreach (var hit in hits)
                 {
-                    ground = hit.point.y;
-                    var transform1 = transform;
-                    transform.LookAt(new Vector3(hit.point.x, transform1.position.y, hit.point.z));
+                    if (hit.collider.CompareTag(Tags.Ground))
+                    {
+                        groundHit = hit.point;
+                        var transform1 = transform;
+                        transform.LookAt(new Vector3(hit.point.x, transform1.position.y, hit.point.z));
+                        break;
+                    }
                 }
             }
             
@@ -41,7 +46,7 @@ namespace Player
             _moveDirection = transform.TransformDirection(_moveDirection) * speed;
 
             // Dont move too close to target and go crazy
-            if (Vector3.Distance(hit.point, transform.position) > 1.2f)
+            if (Vector3.Distance(groundHit, transform.position) > 1.2f)
             {
                 _controller.Move(_moveDirection * Time.deltaTime);
             }
