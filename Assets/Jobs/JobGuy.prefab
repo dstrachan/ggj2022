@@ -229,24 +229,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c557cc8c3610453d880a93b2e3b677ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockedMessage: What's your problem?
-  disabledMessage: 
-  enabledMessage: Hey, you got some weed bro?
+  JobTitle: Sell weed
+  JobDescription: Brad needs a regular hookup for his weed, deal to him and spend
+    a little time hanging out to find new customers.
+  DisabledDescription: Brad thinks you are an undercover cop. He won't try to buy
+    from you for a while.
+  lockedMessage: Uh... you need somthing?
+  disabledMessage: Dude it's going to take some time before I trust you again
+  enabledMessage: Hey man, can you hook me up?
   successMessage: Thanks bro.
-  failureMessage: You know if you are a nark you have to tell me
-  JobActionText: Sell Drugs?
+  failureMessage: Are you a cop?
+  JobActionText: Sell Weed
   cost: 0
   rewards:
   - type: 0
     value: 100
   durationInHours: 2
-  failureCooldownInHours: 0
+  failureCooldownInHours: 4
   unlockRequirements:
   - skill: 2
     value: 1
   successRequirements:
   - skill: 2
-    value: 2
+    value: 10
   billboard: {fileID: 5113225579227784660, guid: dc5f628d2b35f6f4cad356586111f328, type: 3}
 --- !u!82 &47352468
 AudioSource:
@@ -386,6 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531c4703a43345cebf56905f6f65d427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warpSpeed: 3600
 --- !u!1 &2066239142335833465
 GameObject:
   m_ObjectHideFlags: 0
