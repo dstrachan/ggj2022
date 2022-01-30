@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Model
@@ -55,6 +56,14 @@ namespace Model
 
             Save();
             Load();
+        }
+
+        public static void DeleteSaveFile()
+        {
+            if (File.Exists(DataFile))
+            {
+                File.Delete(DataFile);
+            }
         }
 
         public static bool HasSaveGame()

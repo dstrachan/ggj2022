@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
 
     private static void MainMenu()
     {
+        GameState.DeleteSaveFile();
         SceneManager.LoadScene("Scenes/MainMenu");
     }
 
