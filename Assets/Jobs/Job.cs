@@ -17,13 +17,15 @@ namespace Jobs
         [TextArea(4,10)]
         public string JobDescription;
         
+        [TextArea(4,10)]
+        public string DisabledDescription;
+        
         public string lockedMessage;
         public string disabledMessage;
         public string enabledMessage;
         public string successMessage;
         public string failureMessage;
-        
-        
+
         public string JobActionText;
 
         public long cost;
@@ -37,6 +39,9 @@ namespace Jobs
         public GameObject billboard;
         
         private bool IsEnabled => GameState.Money >= cost && _disabledUntil <= GameState.Time.Value;
+        private bool IsTooExpensive => GameState.Money >= cost;
+        private bool IsDisabled => _disabledUntil > GameState.Time.Value;
+        
         private bool IsUnlocked => unlockRequirements.All(x => x.IsMet());
 
         private DateTime _disabledUntil;
@@ -51,10 +56,12 @@ namespace Jobs
         private TextMeshProUGUI _jobDurationMesh;
         private TextMeshProUGUI _jobRequiresMesh;
         private TextMeshProUGUI _jobRewardMesh;
+        private TextMeshProUGUI _jobAcceptTextMesh;
         private TextMeshPro _billboardText;
 
         private TimeWarp _timeWarp;
-        private DateTime _jobStartTime;
+        private DateTime _jobStartTime = DateTime.MaxValue;
+        private bool _jobStarted = false;
         
         private void Start()
         {
@@ -65,6 +72,7 @@ namespace Jobs
             _jobDurationMesh = GameObject.FindGameObjectWithTag(Tags.JobDuration).GetComponent<TextMeshProUGUI>();
             _jobRequiresMesh = GameObject.FindGameObjectWithTag(Tags.JobRequires).GetComponent<TextMeshProUGUI>();
             _jobRewardMesh = GameObject.FindGameObjectWithTag(Tags.JobReward).GetComponent<TextMeshProUGUI>();
+            _jobAcceptTextMesh = GameObject.FindGameObjectWithTag(Tags.JobAcceptText).GetComponent<TextMeshProUGUI>();
             
             _timeWarp = GetComponent<TimeWarp>();
         }
@@ -76,43 +84,67 @@ namespace Jobs
                 _inTrigger = true;
                 _canStartJob = IsUnlocked && IsEnabled;
 
-                _acceptButton.onClick.RemoveAllListeners();
-                _acceptButton.onClick.AddListener(Attempt);
-                _acceptButton.GetComponentInChildren<TextMeshProUGUI>().text = JobActionText;
-                _jobContentMesh.text = JobDescription;
-                _jobTitleMesh.text = JobTitle;
+                UpdateJobBoard();
 
-                _jobDurationMesh.text = $"Takes:\n <color=orange><b>{durationInHours}</b></color> hours";
-                
-                _jobRequiresMesh.text = "Requires:\n";
-                foreach (var require in unlockRequirements)
-                {
-                    if (require.IsMet())
-                    {
-                        _jobRequiresMesh.text += $"<color=green><b>{require.value}</b></color> {require.skill}\n";
-
-                    }
-                    else
-                    {
-                        _jobRequiresMesh.text += $"<color=red><b>{require.value}</b></color> {require.skill}\n";
-
-                    }
-                }
-                
-                _jobRewardMesh.text = "Reward:\n";
-                foreach (var reward in rewards)
-                {
-                    _jobRewardMesh.text += $"<color=green><b>{reward.value}</b></color> {reward.type}\n";
-                }
-                
-         
                 _billboardInstance = Instantiate(billboard, transform);
                 _billboardInstance.transform.localPosition = new Vector3(0, 2, 0);
                 _billboardText = _billboardInstance.GetComponent<TextMeshPro>();
                 UpdateBillboard();
             }
         }
+
+        private void UpdateJobBoard()
+        {
+            _acceptButton.onClick.RemoveAllListeners();  
+            _acceptButton.onClick.AddListener(Attempt);
+            _acceptButton.GetComponentInChildren<TextMeshProUGUI>().text = JobActionText;
+            
+            print(IsDisabled);
+            if (IsDisabled)
+            {
+                _jobContentMesh.text = DisabledDescription;
+                var lockedTime = (_disabledUntil - GameState.Time.Value);
+                _jobAcceptTextMesh.text =
+                    $"<color=#d43131><b>Job available in: {lockedTime.TotalHours.ToString("F1")} hours</b></color>";
+            }
+            else 
+            {
+                _jobContentMesh.text = JobDescription;
+            }
         
+            _jobTitleMesh.text = JobTitle;
+
+            _jobDurationMesh.text = $"Takes:\n <color=orange><b>{durationInHours}</b></color> hours";
+
+            _jobRequiresMesh.text = "Requires:\n";
+            
+            bool lackRequirement = false;
+            foreach (var require in unlockRequirements)
+            {
+                if (require.IsMet())
+                {
+                    _jobRequiresMesh.text += $"<color=green><b>{require.value}</b></color> {require.skill}\n";
+                }
+                else
+                {
+                    lackRequirement = true;
+                    _jobRequiresMesh.text += $"<color=red><b>{require.value}</b></color> {require.skill}\n";
+                }
+            }
+
+            if (lackRequirement && !IsDisabled)
+            {
+                _jobAcceptTextMesh.text =
+                    $"<color=#d43131><b>You lack the skills for this job!</b></color>";
+            }
+
+            _jobRewardMesh.text = "Reward:\n";
+            foreach (var reward in rewards)
+            {
+                _jobRewardMesh.text += $"<color=green><b>{reward.value}</b></color> {reward.type}\n";
+            }
+        }
+
         private void OnTriggerExit(Collider other)
         {
             if (other.gameObject.CompareTag(Tags.Player))
@@ -126,11 +158,15 @@ namespace Jobs
         private void Update()
         {
             _acceptPanel.gameObject.SetActive(_inTrigger && !TimeWarp.TimeIsWarping);
-            _acceptButton.gameObject.SetActive(_canStartJob && !TimeWarp.TimeIsWarping);
+            _acceptButton.gameObject.SetActive(_canStartJob && !IsDisabled && !TimeWarp.TimeIsWarping);
+            
+            _jobAcceptTextMesh.gameObject.SetActive(IsDisabled || !_canStartJob && !TimeWarp.TimeIsWarping);
 
-            if (_billboardText != null && _canStartJob && _jobStartTime + TimeSpan.FromHours(durationInHours) < GameState.Instance.Time.Value)
+            if (_billboardText != null && _jobStarted && _canStartJob && _jobStartTime + TimeSpan.FromHours(durationInHours) < GameState.Instance.Time.Value)
             {
+                _jobStarted = false;
                 UpdateBillboard();
+                UpdateJobBoard();
             }
         }
 
@@ -155,7 +191,8 @@ namespace Jobs
             if (!IsEnabled) return; 
 
             GameState.Money -= cost;
-            
+
+            _jobStarted = true;
             _jobStartTime = GameState.Instance.Time.Value;
             
             _timeWarp.SkipTimeForDuration(TimeSpan.FromHours(durationInHours));

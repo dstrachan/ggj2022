@@ -11,6 +11,7 @@
     public const string JobDuration = "JobDuration";
     public const string JobRequires = "JobRequires";
     public const string JobReward = "JobReward";
+    public const string JobAcceptText = "JobAcceptText";
     public const string Home = "Home";
     public const string FadeToBlack = "FadeToBlack";
 }
