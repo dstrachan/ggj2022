@@ -74,6 +74,7 @@ MonoBehaviour:
   JobTitle: 
   JobDescription: Regular exersise is great for your health. Pay entry to the gym
     and gains some strength.
+  DisabledDescription: 
   lockedMessage: 
   disabledMessage: 
   enabledMessage: Gym
@@ -84,7 +85,7 @@ MonoBehaviour:
   rewards:
   - type: 2
     value: 10
-  durationInHours: 1
+  durationInHours: 4
   failureCooldownInHours: 0
   unlockRequirements: []
   successRequirements: []
