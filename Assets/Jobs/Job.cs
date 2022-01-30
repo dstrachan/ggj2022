@@ -39,7 +39,7 @@ namespace Jobs
         public GameObject billboard;
         
         private bool IsEnabled => GameState.Money >= cost && _disabledUntil <= GameState.Time.Value;
-        private bool IsTooExpensive => GameState.Money >= cost;
+        private bool IsTooExpensive => GameState.Money < cost;
         private bool IsDisabled => _disabledUntil > GameState.Time.Value;
         
         private bool IsUnlocked => unlockRequirements.All(x => x.IsMet());
@@ -95,32 +95,31 @@ namespace Jobs
                 UpdateBillboard();
             }
         }
-
-        // private void OnTriggerStay(Collider other)
-        // {
-        //     if (other.gameObject.CompareTag(Tags.Player))
-        //     {
-        //         _activeJob = true;
-        //     }
-        // }
-
+        
         private void UpdateJobBoard()
         {
             _acceptButton.onClick.RemoveAllListeners();  
             _acceptButton.onClick.AddListener(Attempt);
             _acceptButton.GetComponentInChildren<TextMeshProUGUI>().text = $"(A) {JobActionText}";
 
+            _jobContentMesh.text = JobDescription;
             if (IsDisabled)
             {
-                _jobContentMesh.text = DisabledDescription;
+                if (!string.IsNullOrEmpty(DisabledDescription))
+                {
+                    _jobContentMesh.text = DisabledDescription;
+                }
+
                 var lockedTime = (_disabledUntil - GameState.Time.Value);
                 _jobAcceptTextMesh.text =
                     $"<color=#d43131><b>Job available in: {lockedTime.TotalHours.ToString("F1")} hours</b></color>";
             }
-            else 
+            else if (IsTooExpensive)
             {
-                _jobContentMesh.text = JobDescription;
+                _jobAcceptTextMesh.text =
+                    $"<color=#d43131><b>You can't afford to do this</b></color>";
             }
+ 
         
             _jobTitleMesh.text = JobTitle;
 
@@ -141,6 +140,20 @@ namespace Jobs
                     _jobRequiresMesh.text += $"<color=red><b>{require.value}</b></color> {require.skill}\n";
                 }
             }
+
+            if (cost > 0)
+            {
+                if (GameState.Instance.Money >= cost)
+                {
+                    _jobRequiresMesh.text += $"<color=green>Costs ${cost}</color>";
+                }
+                else
+                {
+                    _jobRequiresMesh.text += $"<color=red>Costs ${cost}</color>";
+
+                }
+            }
+                
 
             if (lackRequirement && !IsDisabled)
             {
@@ -189,10 +202,10 @@ namespace Jobs
                     UpdateJobBoard();
                 }
 
-                // if (!_jobStarted && _canStartJob && Input.GetButtonDown("JoyJump"))
-                // {
-                //     Attempt();
-                // }
+                if (!_jobStarted && _canStartJob && Input.GetButtonDown("JoyJump"))
+                {
+                    Attempt();
+                }
             }
         }
 

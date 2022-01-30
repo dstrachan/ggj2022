@@ -57,8 +57,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 21.061646, y: 9.344737, z: 38.153473}
+  m_Center: {x: 6.802845, y: 2.172367, z: 1.9839706}
 --- !u!114 &7192949298377288342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,6 +75,7 @@ MonoBehaviour:
   JobDescription: You could never afford a university education. Read a book instead.
     You'll still never get to the interview stage of a job, but perhaps you can use
     your new found inteligence elswhere.
+  DisabledDescription: 
   lockedMessage: 
   disabledMessage: 
   enabledMessage: Library
@@ -84,8 +85,8 @@ MonoBehaviour:
   cost: 3
   rewards:
   - type: 3
-    value: 10
-  durationInHours: 1
+    value: 15
+  durationInHours: 2
   failureCooldownInHours: 0
   unlockRequirements: []
   successRequirements: []

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3580935994035975919}
   - component: {fileID: 3580935994035975922}
   - component: {fileID: 3251260132753010220}
-  - component: {fileID: 3251260132753010219}
   - component: {fileID: 3251260132753010221}
   - component: {fileID: 4897589069816562970}
   m_Layer: 0
@@ -72,26 +71,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JobTitle: Work a shift
-  JobDescription: Work a hard shit at corpo
+  JobDescription: Work a hard shift at corpo warehouse. Those boxes aren't going
+    to deliver themselves!
   DisabledDescription: 
-  lockedMessage: I can trust you?
-  disabledMessage: I'm good for now
-  enabledMessage: I'm ready to buy
-  successMessage: Thanks!
-  failureMessage: Actuaslly, never mind!
-  JobActionText: Sell MDMA
+  lockedMessage: 
+  disabledMessage: 
+  enabledMessage: No Toilet breaks!
+  successMessage: Here is your wage, work harder next time.
+  failureMessage: 
+  JobActionText: Work Hard
   cost: 0
   rewards:
   - type: 0
-    value: 50
-  durationInHours: 1
+    value: 5
+  durationInHours: 4
   failureCooldownInHours: 0
-  unlockRequirements:
-  - skill: 2
-    value: 2
-  successRequirements:
-  - skill: 2
-    value: 4
+  unlockRequirements: []
+  successRequirements: []
   billboard: {fileID: 5113225579227784660, guid: dc5f628d2b35f6f4cad356586111f328, type: 3}
 --- !u!82 &3251260132753010220
 AudioSource:
@@ -189,24 +185,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3251260132753010219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3580935994035975921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f93ef75ea76b45c4ba2937e2cc9bf7a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Sounds:
-  - {fileID: 8300000, guid: 5bb6492d9f2aa84449a68e62367287fd, type: 3}
-  - {fileID: 8300000, guid: acb6c25f26736864ea0ec71438b625df, type: 3}
-  - {fileID: 8300000, guid: 687ac74e220ad8e4d863a5b70dd9a493, type: 3}
-  Cooldown: 5
-  ScaleTime: 0.5
 --- !u!114 &3251260132753010221
 MonoBehaviour:
   m_ObjectHideFlags: 0
