@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject expensesPanel;
     public Transform expensesContent;
     public TextMeshProUGUI expenseItemPrefab;
-    public TextMeshProUGUI expensesTotal;
+    public TextMeshProUGUI expensesMoney;
+    public TextMeshProUGUI expensesFamily;
     public Scrollbar expenseScrollbar;
     public TextMeshProUGUI endOfDayMessage;
     public Button nextDayButton;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     private Transform _player;
 
     private long _pendingExpenses;
+    private int _pendingFamily;
     private bool _isShowing;
 
     private AudioSource _audioSource;
@@ -43,7 +45,8 @@ public class GameManager : MonoBehaviour
         _fadeToBlack = GameObject.FindGameObjectWithTag(Tags.FadeToBlack).GetComponent<Image>();
         _audioSource = GetComponent<AudioSource>();
         nextDayButton.onClick.AddListener(AdvanceDay);
-        expensesTotal.text = string.Empty;
+        expensesMoney.text = string.Empty;
+        expensesFamily.text = string.Empty;
     }
 
     private void AdvanceDay()
@@ -126,8 +129,18 @@ public class GameManager : MonoBehaviour
         _pendingExpenses = expenses.Sum(x => x.Cost);
         var remaining = money - _pendingExpenses;
         var color = remaining > 0 ? "green" : "red";
-        expensesTotal.text = @$"<color=green>${GameState.Instance.Money:n0}</color>
-<color=red>-${expenses.Sum(x => x.Cost):n0}</color>
+        expensesMoney.text = @$"<b>Money</b>
+<color=green>${money:n0}</color>
+<color=red>-${_pendingExpenses:n0}</color>
+= <color={color}>${remaining}</color>";
+
+        var family = GameState.Instance.Family;
+        _pendingFamily = 10;
+        remaining = family - _pendingFamily;
+        color = remaining > 0 ? "green" : "red";
+        expensesFamily.text = $@"<b>Family</b>
+<color=green>${family:n0}</color>
+<color=red>-${_pendingFamily:n0}</color>
 = <color={color}>${remaining}</color>";
 
         yield return new WaitForSeconds(1);
@@ -144,11 +157,14 @@ public class GameManager : MonoBehaviour
         }
 
         expensesPanel.SetActive(false);
-        expensesTotal.text = string.Empty;
+        expensesMoney.text = string.Empty;
+        expensesFamily.text = string.Empty;
         nextDayButton.gameObject.SetActive(false);
 
         GameState.Instance.Money -= _pendingExpenses;
+        GameState.Instance.Family -= _pendingFamily;
         _pendingExpenses = 0;
+        _pendingFamily = 0;
     }
 
     private void OnGUI()
