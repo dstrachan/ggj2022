@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3156842408212995728}
   - component: {fileID: 3991204105856075342}
   - component: {fileID: 3991204105856075337}
-  - component: {fileID: 3991204105856075343}
   - component: {fileID: 6452227178435227000}
   m_Layer: 0
   m_Name: Job Gym
@@ -57,8 +56,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 15, y: 15, z: 15}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 18.353104, y: 15, z: 15}
+  m_Center: {x: 0.089090824, y: 0, z: 0}
 --- !u!114 &3156842408212995728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c557cc8c3610453d880a93b2e3b677ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JobTitle: 
+  JobTitle: Pump Iron
   JobDescription: Regular exersise is great for your health. Pay entry to the gym
     and gains some strength.
   DisabledDescription: 
@@ -84,7 +83,7 @@ MonoBehaviour:
   cost: 7
   rewards:
   - type: 2
-    value: 30
+    value: 35
   durationInHours: 4
   failureCooldownInHours: 0
   unlockRequirements: []
@@ -110,8 +109,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 5
+  MinDistance: 3.9732304
+  MaxDistance: 12.6
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -204,18 +203,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1c1fa0bfc16e7a0469576ba8058cdcc5, type: 3}
   Cooldown: 5
   ScaleTime: 0.5
---- !u!114 &3991204105856075343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3156842408212995731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 447875cadfb1d024893e3d27da9bf90a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6452227178435227000
 MonoBehaviour:
   m_ObjectHideFlags: 0

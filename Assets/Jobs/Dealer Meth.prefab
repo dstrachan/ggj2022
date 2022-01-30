@@ -87,6 +87,8 @@ MonoBehaviour:
   cost: 150
   rewards:
   - type: 0
+    value: 1500
+  - type: 3
     value: 1000
   durationInHours: 6
   failureCooldownInHours: 12

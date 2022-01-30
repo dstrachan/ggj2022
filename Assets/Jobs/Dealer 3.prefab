@@ -75,7 +75,7 @@ MonoBehaviour:
   JobTitle: Sell Ekkies
   JobDescription: Rolland likes to party one weekends. He mostly goes to techno clubs
     and dances directly infront of the speakers.
-  DisabledDescription: 
+  DisabledDescription: Rolland has enough for now.
   lockedMessage: Can I trust you?
   disabledMessage: I'm good for now
   enabledMessage: I'm ready to buy
@@ -87,15 +87,15 @@ MonoBehaviour:
   - type: 0
     value: 65
   - type: 4
-    value: 15
+    value: 30
   durationInHours: 3
-  failureCooldownInHours: 0
+  failureCooldownInHours: 1
   unlockRequirements:
   - skill: 2
-    value: 15
+    value: 14
   successRequirements:
   - skill: 2
-    value: 25
+    value: 35
   billboard: {fileID: 5113225579227784660, guid: dc5f628d2b35f6f4cad356586111f328, type: 3}
 --- !u!82 &3251260132753010220
 AudioSource:
@@ -118,7 +118,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 6.8208466
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

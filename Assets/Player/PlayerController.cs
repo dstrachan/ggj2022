@@ -138,7 +138,7 @@ namespace Player
                     _moveDirection = transform.TransformDirection(_moveDirection) * speed;
 
                     // Dont move too close to target and go crazy
-                    if (Vector3.Distance(groundHit, transform.position) > 1.2f)
+                    if (Vector3.Distance(groundHit, transform.position) > 1.6f)
                     {
                         _controller.Move(_moveDirection * Time.deltaTime);
                     }

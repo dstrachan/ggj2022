@@ -253,7 +253,7 @@ MonoBehaviour:
     value: 1
   successRequirements:
   - skill: 2
-    value: 3
+    value: 10
   billboard: {fileID: 5113225579227784660, guid: dc5f628d2b35f6f4cad356586111f328, type: 3}
 --- !u!82 &47352468
 AudioSource:

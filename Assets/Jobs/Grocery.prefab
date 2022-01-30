@@ -57,8 +57,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.029692, y: 9.146506, z: 18.09703}
-  m_Center: {x: 0.29195118, y: 2.0680785, z: 1.8277969}
+  m_Size: {x: 10.362671, y: 9.146506, z: 8.750023}
+  m_Center: {x: 1.6254616, y: 2.0680785, z: -0.0749321}
 --- !u!114 &1875122225949639540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
   cost: 25
   rewards:
   - type: 1
-    value: 10
+    value: 15
   durationInHours: 2
   failureCooldownInHours: 0
   unlockRequirements: []
@@ -111,7 +111,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 6.136629
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

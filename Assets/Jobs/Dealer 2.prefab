@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c557cc8c3610453d880a93b2e3b677ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JobTitle: 
+  JobTitle: Designer Drugs
   JobDescription: Alex has tried it all and is always looking for something new.
     Dazle him with the latest designer drugs. Uppers, downers, hallucinogens and
     more. With a little charmisma he might find something that tickles his fancy.
@@ -87,17 +87,17 @@ MonoBehaviour:
   cost: 0
   rewards:
   - type: 0
-    value: 160
+    value: 175
   - type: 4
     value: 25
-  durationInHours: 4
-  failureCooldownInHours: 4
+  durationInHours: 3
+  failureCooldownInHours: 6
   unlockRequirements:
   - skill: 2
     value: 30
   successRequirements:
   - skill: 2
-    value: 40
+    value: 50
   billboard: {fileID: 5113225579227784660, guid: dc5f628d2b35f6f4cad356586111f328, type: 3}
 --- !u!82 &479919473703672746
 AudioSource:
