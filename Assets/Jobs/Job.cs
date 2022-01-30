@@ -166,8 +166,8 @@ namespace Jobs
                 case RewardType.Money:
                     GameState.Money += value;
                     break;
-                case RewardType.Love:
-                    GameState.Love += value;
+                case RewardType.Family:
+                    GameState.Family += value;
                     break;
                 case RewardType.StrengthXp:
                     GameState.Strength.Xp += value;
