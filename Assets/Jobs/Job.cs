@@ -168,6 +168,11 @@ namespace Jobs
                 UpdateBillboard();
                 UpdateJobBoard();
             }
+            
+            if (Input.GetButton("JoyJump"))
+            {
+                Attempt();
+            }
         }
 
         private void UpdateBillboard()
