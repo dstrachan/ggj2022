@@ -10731,8 +10731,8 @@ Transform:
   - {fileID: 888513139}
   - {fileID: 1183381027}
   - {fileID: 1070892389}
-  - {fileID: 267343517}
   - {fileID: 1152914743}
+  - {fileID: 267343517}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23375,6 +23375,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dealer 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 701674ac41a59954eab3d1ba582a1ac4, type: 3}
+      propertyPath: rewards.Array.data[0].value
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 701674ac41a59954eab3d1ba582a1ac4, type: 3}
+      propertyPath: unlockRequirements.Array.data[0].value
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 701674ac41a59954eab3d1ba582a1ac4, type: 3}
+      propertyPath: successRequirements.Array.data[0].value
+      value: 35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 701674ac41a59954eab3d1ba582a1ac4, type: 3}
 --- !u!4 &1483633318 stripped
@@ -27779,6 +27791,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1875122225949639540, guid: a13ad9274a18e6341a001933b425e3e7, type: 3}
+      propertyPath: rewards.Array.data[0].value
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875122225949639540, guid: a13ad9274a18e6341a001933b425e3e7, type: 3}
+      propertyPath: unlockRequirements.Array.data[0].value
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875122225949639540, guid: a13ad9274a18e6341a001933b425e3e7, type: 3}
+      propertyPath: successRequirements.Array.data[0].value
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1875122225949639543, guid: a13ad9274a18e6341a001933b425e3e7, type: 3}
       propertyPath: m_Name
       value: Dealer 2
@@ -27792,17 +27816,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 923225502}
     m_Modifications:
+    - target: {fileID: 479919473703672749, guid: 021300911af43e14093c4e766af65e62, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875122225949639529, guid: 021300911af43e14093c4e766af65e62, type: 3}
+      propertyPath: m_Size.x
+      value: 13.029692
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875122225949639529, guid: 021300911af43e14093c4e766af65e62, type: 3}
+      propertyPath: m_Center.x
+      value: 0.29195118
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875122225949639529, guid: 021300911af43e14093c4e766af65e62, type: 3}
+      propertyPath: m_Center.y
+      value: 2.0680785
+      objectReference: {fileID: 0}
     - target: {fileID: 1875122225949639531, guid: 021300911af43e14093c4e766af65e62, type: 3}
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1875122225949639531, guid: 021300911af43e14093c4e766af65e62, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.63
+      value: -19
       objectReference: {fileID: 0}
     - target: {fileID: 1875122225949639531, guid: 021300911af43e14093c4e766af65e62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.099998474
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1875122225949639531, guid: 021300911af43e14093c4e766af65e62, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27835,6 +27875,10 @@ PrefabInstance:
     - target: {fileID: 1875122225949639531, guid: 021300911af43e14093c4e766af65e62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875122225949639540, guid: 021300911af43e14093c4e766af65e62, type: 3}
+      propertyPath: cost
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1875122225949639543, guid: 021300911af43e14093c4e766af65e62, type: 3}
       propertyPath: m_Name
