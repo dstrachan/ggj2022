@@ -156,6 +156,8 @@ namespace Jobs
 
         private void Update()
         {
+            print(IsDisabled);
+            
             _acceptPanel.gameObject.SetActive(_inTrigger && !TimeWarp.TimeIsWarping);
             _acceptButton.gameObject.SetActive(_canStartJob && !IsDisabled && !TimeWarp.TimeIsWarping);
             
@@ -168,10 +170,10 @@ namespace Jobs
                 UpdateJobBoard();
             }
             
-            if (!_jobStarted && _canStartJob && Input.GetButtonDown("JoyJump"))
-            {
-                Attempt();
-            }
+            // if (!_jobStarted && _canStartJob && Input.GetButtonDown("JoyJump"))
+            // {
+            //     Attempt();
+            // }
         }
 
         private void UpdateBillboard()
