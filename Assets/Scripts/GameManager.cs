@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
 
     private static void MainMenu()
     {
+        GameState.DeleteSaveFile();
         SceneManager.LoadScene("Scenes/MainMenu");
     }
 
@@ -175,7 +176,7 @@ public class GameManager : MonoBehaviour
 = <color={color}>${remaining}</color>";
 
         var family = GameState.Instance.Family;
-        _pendingFamily = 10;
+        _pendingFamily = 20;
         remaining = family - _pendingFamily;
         color = remaining > 0 ? "green" : "red";
         expensesFamily.text = $@"<b>Family</b>
