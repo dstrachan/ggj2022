@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1586827348638487137}
   - component: {fileID: 768227252997819071}
   - component: {fileID: 768227252997819064}
-  - component: {fileID: 768227252997819070}
   - component: {fileID: 7223837642005471625}
   m_Layer: 0
   m_Name: Job University
@@ -57,8 +56,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 23.940926, y: 5, z: 41.741623}
+  m_Center: {x: 4.9122944, y: 0, z: 18.615547}
 --- !u!114 &1586827348638487137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,9 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c557cc8c3610453d880a93b2e3b677ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JobTitle: 
+  JobTitle: University Degree
   JobDescription: If you want a real job then you'll need a degree. Pull yourself
     up by your boot straps and educate yourself.
+  DisabledDescription: 
   lockedMessage: 
   disabledMessage: 
   enabledMessage: Private University
@@ -83,9 +83,9 @@ MonoBehaviour:
   cost: 40000
   rewards:
   - type: 3
-    value: 100
-  durationInHours: 5
-  failureCooldownInHours: 10
+    value: 1000
+  durationInHours: 12
+  failureCooldownInHours: 1000
   unlockRequirements:
   - skill: 1
     value: 0
@@ -205,18 +205,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 701475ce98fe699469c6b2eaf275a10d, type: 3}
   Cooldown: 5
   ScaleTime: 0.5
---- !u!114 &768227252997819070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586827348638487138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 447875cadfb1d024893e3d27da9bf90a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7223837642005471625
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -57,8 +57,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 16.594519, y: 9.146506, z: 18.09703}
+  m_Center: {x: -1.4904624, y: 2.0680788, z: 1.8277969}
 --- !u!114 &1875122225949639540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,17 +71,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c557cc8c3610453d880a93b2e3b677ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JobTitle: Buy Grocery
+  JobTitle: Buy Groceries
   JobDescription: Pick up groceries for the family, otherwise you'll have nothing
     for dinner tonight
   DisabledDescription: 
-  lockedMessage: You're not very charismatic
-  disabledMessage: I'm looking for something more adventurous
-  enabledMessage: What are you seling?
-  successMessage: You sold high end drugs
-  failureMessage: Not what I'm looking for today
-  JobActionText: Sell high end drugs
-  cost: 0
+  lockedMessage: 
+  disabledMessage: 
+  enabledMessage: 
+  successMessage: That took longer than expected
+  failureMessage: 
+  JobActionText: Shop
+  cost: 25
   rewards:
   - type: 1
     value: 10

@@ -34,7 +34,8 @@ Transform:
   m_LocalPosition: {x: 5.6499968, y: 0.8813151, z: 124.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6405335070009835252}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -74,6 +75,7 @@ MonoBehaviour:
   JobTitle: 
   JobDescription: Rolland likes to party one weekends. He mostly goes to techno clubs
     and dances directly infront of the speakers.
+  DisabledDescription: 
   lockedMessage: I can trust you?
   disabledMessage: I'm good for now
   enabledMessage: I'm ready to buy
@@ -83,15 +85,15 @@ MonoBehaviour:
   cost: 0
   rewards:
   - type: 0
-    value: 50
-  durationInHours: 1
+    value: 100
+  durationInHours: 3
   failureCooldownInHours: 0
   unlockRequirements:
   - skill: 2
-    value: 2
+    value: 10
   successRequirements:
   - skill: 2
-    value: 4
+    value: 20
   billboard: {fileID: 5113225579227784660, guid: dc5f628d2b35f6f4cad356586111f328, type: 3}
 --- !u!82 &3251260132753010220
 AudioSource:
@@ -232,3 +234,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   warpSpeed: 3600
+--- !u!1001 &119316506
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3580935994035975917}
+    m_Modifications:
+    - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405335070027357936, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2af708ca22c6f09418a29648c713602e, type: 2}
+    - target: {fileID: 6405335070027357938, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+      propertyPath: m_Name
+      value: BlankGuy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+--- !u!4 &6405335070009835252 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
+  m_PrefabInstance: {fileID: 119316506}
+  m_PrefabAsset: {fileID: 0}
