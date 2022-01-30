@@ -6,28 +6,46 @@ using Time = Model.Time;
 [RequireComponent(typeof(TimeWarp))]
 public class GameManager : MonoBehaviour
 {
-    public int EndOfDayHour;
-    private TimeWarp _timeWarp;
+    public int endOfDayHour;
 
-    void Start()
+    private TimeWarp _timeWarp;
+    private DateTime _tomorrow;
+    private bool _showExpenses;
+
+    private void Start()
     {
         _timeWarp = GetComponent<TimeWarp>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (GameState.Instance.Time.Value.Hour >= EndOfDayHour)
+        var tomorrow = Time.FirstDay.AddDays(GameState.Instance.Days.Value + 1);
+        if (TimeWarp.TimeIsWarping)
         {
-            var tomorrowMorn = Time.FirstDay.AddDays(GameState.Instance.Days.Value + 1);
-
-            // var timeSpan = tomorrowMorn - GameState.Instance.Time.Value;
-            //
-            // var adjusted = tomorrowMorn.Subtract(timeSpan / _timeWarp.warpSpeed);
-            
-            //print(timeSpan / _timeWarp.warpSpeed);
-            _timeWarp.SkipUntil(tomorrowMorn);
-            
+            // We may be warping due to non-end of day reasons
+            if (tomorrow == _tomorrow)
+            {
+                // Show expenses window while warping
+                _showExpenses = true;
+            }
+        }
+        else if (GameState.Instance.Time.Value.Hour >= endOfDayHour)
+        {
+            // Start warping
+            _tomorrow = Time.FirstDay.AddDays(GameState.Instance.Days.Value + 1);
+            _timeWarp.SkipUntil(_tomorrow);
+        }
+        else if (tomorrow == _tomorrow && !_showExpenses)
+        {
+            // Finished warping and looking at expenses
             GameState.Instance.Days.Value++;
+        }
+    }
+
+    private void OnGUI()
+    {
+        if (_showExpenses)
+        {
         }
     }
 }

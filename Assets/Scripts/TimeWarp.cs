@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TimeWarp : MonoBehaviour
 {
-    public static bool TimeIsWarping = false;
+    public static bool TimeIsWarping;
     
     public int warpSpeed = 3600;
 

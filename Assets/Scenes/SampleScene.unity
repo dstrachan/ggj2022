@@ -4730,7 +4730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5480048ac8ee49eb8c7c373d2298bbab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EndOfDayHour: 21
+  endOfDayHour: 21
 --- !u!4 &1409957477
 Transform:
   m_ObjectHideFlags: 0
