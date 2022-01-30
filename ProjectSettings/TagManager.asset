@@ -12,6 +12,9 @@ TagManager:
   - JobContent
   - JobPanel
   - JobTitle
+  - JobDuration
+  - JobRequires
+  - JobReward
   layers:
   - Default
   - TransparentFX
