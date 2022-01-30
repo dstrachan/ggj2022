@@ -185,7 +185,7 @@ namespace Jobs
             }
             else
             {
-                _billboardText.color = Color.gray;
+                _billboardText.color = Color.red;
                 _billboardText.text = lockedMessage;
             }
         }
