@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             if (tomorrow == _tomorrow && !expensesPanel.activeSelf)
             {
                 // Show expenses window while warping
-                expensesContent.text = string.Join('\n', Expenses.Expenses.GetExpenses()
+                expensesContent.text = string.Join("\n\n", Expenses.Expenses.GetExpenses()
                     .Select(x => string.Join('\n', $"{x.Title} = ${x.Cost:n0}", x.Description)));
                 expensesPanel.SetActive(true);
             }
