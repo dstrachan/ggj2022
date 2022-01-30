@@ -1423,7 +1423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyValue: {fileID: 6559703837367216455}
-  loveValue: {fileID: 7439049669696418131}
+  familyValue: {fileID: 7439049669696418131}
   strengthValue: {fileID: 217961298837271398}
   strengthButton: {fileID: 217961297346534043}
   intelligenceValue: {fileID: 217961297299817866}
@@ -2104,7 +2104,7 @@ GameObject:
   - component: {fileID: 4091837225205048731}
   - component: {fileID: 1811007384991360309}
   m_Layer: 5
-  m_Name: Love Label
+  m_Name: Family Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2158,7 +2158,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Love:'
+  m_text: 'Family:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2239,7 +2239,7 @@ GameObject:
   - component: {fileID: 7522277360923324176}
   - component: {fileID: 7439049669696418131}
   m_Layer: 5
-  m_Name: Love Value
+  m_Name: Family Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2688,7 +2688,7 @@ GameObject:
   - component: {fileID: 7938795630444754216}
   - component: {fileID: 2383204750425617035}
   m_Layer: 5
-  m_Name: Love Button Placeholder
+  m_Name: Family Button Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

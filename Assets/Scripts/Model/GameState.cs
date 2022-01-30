@@ -26,7 +26,7 @@ namespace Model
         public Skill Intelligence => _skills[SkillEnum.Intelligence];
         public Skill Charisma => _skills[SkillEnum.Charisma];
         public long Money { get; set; }
-        public long Love { get; set; }
+        public int Family { get; set; }
 
         private static readonly string DataFile = $"{Application.persistentDataPath}/data.json";
 
@@ -34,6 +34,13 @@ namespace Model
 
         private GameState()
         {
+            Time.Reset();
+            Days.Reset();
+            Strength.Reset();
+            Intelligence.Reset();
+            Charisma.Reset();
+            Money = 50;
+            Family = 50;
         }
 
         public void Reset()
@@ -43,8 +50,8 @@ namespace Model
             Strength.Reset();
             Intelligence.Reset();
             Charisma.Reset();
-            Money = 0;
-            Love = 0;
+            Money = 50;
+            Family = 50;
 
             Save();
             Load();
@@ -61,7 +68,7 @@ namespace Model
                     gameState = JsonConvert.DeserializeObject<GameState>(json);
                     if (gameState.Days.Value > 0)
                     {
-                        gameState.Time.SetDays(gameState.Days.Value);    
+                        gameState.Time.SetDays(gameState.Days.Value);
                     }
                 }
                 catch

@@ -3,7 +3,7 @@
     public enum RewardType
     {
         Money,
-        Love,
+        Family,
         StrengthXp,
         IntelligenceXp,
         CharismaXp,
