@@ -79,6 +79,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        if (GameState.Instance.Money < 0 || GameState.Instance.Family < 0)
+        {
+            throw new NotImplementedException(); // TODO: game over
+        }
+    }
+
     private IEnumerator FadeIn()
     {
         for (var i = 0; i < 100; i++)
