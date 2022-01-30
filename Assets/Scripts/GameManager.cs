@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int endOfDayHour;
     public GameObject expensesPanel;
     public TextMeshProUGUI expensesContent;
+    public TextMeshProUGUI endOfDayMessage;
     public Button nextDayButton;
 
     private TimeWarp _timeWarp;
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
             if (!_fading)
             {
                 _fading = true;
+                endOfDayMessage.enabled = true;
                 StartCoroutine(nameof(FadeOut));
             }
         
@@ -73,7 +75,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 100; i++)
         {
             _fadeToBlack.color = new Color(_fadeToBlack.color.r, _fadeToBlack.color.g, _fadeToBlack.color.b, 1 - i/100f);
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.04f);
         }
 
         _fading = false;
@@ -84,13 +86,14 @@ public class GameManager : MonoBehaviour
         for (int i = 1; i < 100; i++)
         {
             _fadeToBlack.color = new Color(_fadeToBlack.color.r, _fadeToBlack.color.g, _fadeToBlack.color.b, (float)i/100f);
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.04f);
         }
+        endOfDayMessage.enabled = false;
         
         _player.position = _homePosition.position;
         
         // Show expenses window while warping
-        expensesContent.text = string.Join('\n', Expenses.Expenses.GetExpenses()
+        expensesContent.text = string.Join("\n\n", Expenses.Expenses.GetExpenses()
             .Select(x => string.Join('\n', $"{x.Title} = ${x.Cost:n0}", x.Description)));
         expensesPanel.SetActive(true);
         
