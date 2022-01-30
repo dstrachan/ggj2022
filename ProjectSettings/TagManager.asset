@@ -17,6 +17,7 @@ TagManager:
   - JobReward
   - JobAcceptText
   - Wife
+  - NoShader
   layers:
   - Default
   - TransparentFX

@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
         ExitButton.onClick.AddListener(Exit);
 
         ContinueButton.enabled = GameState.HasSaveGame();
+        ContinueButton.interactable = GameState.HasSaveGame();
     }
 
     private void Update()
@@ -24,18 +25,39 @@ public class MainMenu : MonoBehaviour
         {
             Continue();
         }
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (SceneManager.GetActiveScene().name == "MainCityScene")
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
 
-    private static void NewGame()
+    private void NewGame()
     {
         GameState.Instance.Reset();
-        Continue();
+        LoadCity();
     }
 
-    private static void Continue()
+    private static void LoadCity()
     {
         SceneManager.LoadSceneAsync("Scenes/MainCityScene");
         SceneManager.UnloadSceneAsync("Scenes/MainMenu");
+    }
+
+    private void Continue()
+    {
+        if (SceneManager.GetActiveScene().name == "MainCityScene")
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            LoadCity();
+        }
+    
     }
 
     private static void Exit()

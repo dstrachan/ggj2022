@@ -72,28 +72,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c557cc8c3610453d880a93b2e3b677ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JobTitle: 
+  JobTitle: Sell Ekkies
   JobDescription: Rolland likes to party one weekends. He mostly goes to techno clubs
     and dances directly infront of the speakers.
   DisabledDescription: 
-  lockedMessage: I can trust you?
+  lockedMessage: Can I trust you?
   disabledMessage: I'm good for now
   enabledMessage: I'm ready to buy
   successMessage: Thanks!
-  failureMessage: Actuaslly, never mind!
+  failureMessage: Actually, never mind!
   JobActionText: Sell MDMA
   cost: 0
   rewards:
   - type: 0
-    value: 100
+    value: 65
+  - type: 4
+    value: 15
   durationInHours: 3
   failureCooldownInHours: 0
   unlockRequirements:
   - skill: 2
-    value: 10
+    value: 15
   successRequirements:
   - skill: 2
-    value: 20
+    value: 25
   billboard: {fileID: 5113225579227784660, guid: dc5f628d2b35f6f4cad356586111f328, type: 3}
 --- !u!82 &3251260132753010220
 AudioSource:
@@ -247,7 +249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.04
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -255,7 +257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.82
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
       propertyPath: m_LocalRotation.w

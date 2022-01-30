@@ -17,6 +17,6 @@ public class MoneyDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _moneyText.text = $"${GameState.Instance.Money}";
+        _moneyText.text = $"${GameState.Instance.Money:n0}";
     }
 }

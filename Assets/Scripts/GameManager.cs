@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public Button nextDayButton;
     public AudioClip CashRegister;
     public GameObject gameOverPanel;
+    public GameObject menuPanel;
     public TextMeshProUGUI gameOverMessage;
     public Button mainMenuButton;
 
@@ -61,6 +62,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            menuPanel.SetActive(true);
+        }
+        
         var tomorrow = Time.FirstDay.AddDays(GameState.Instance.Days.Value + 1);
         
         if (!_endOfDay && !mainMenuButton.isActiveAndEnabled && !TimeWarp.TimeIsWarping && ((GameState.Instance.Time.Value.Hour >= endOfDayHour && GameState.Instance.Time.Value < tomorrow) || (GameState.Instance.Time.Value.Hour < 8 && GameState.Instance.Time.Value < tomorrow)))
@@ -117,9 +123,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            yield return FadeIn();
             GameState.Instance.Days.Value++;
             _wifeAudio.Play();
+            yield return FadeIn();
             _nextDay = false;
         }
         _endOfDay = false;
