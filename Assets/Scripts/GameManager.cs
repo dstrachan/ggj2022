@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using Model;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Time = Model.Time;
@@ -9,6 +11,9 @@ using Time = Model.Time;
 public class GameManager : MonoBehaviour
 {
     public int endOfDayHour;
+    public GameObject expensesPanel;
+    public TextMeshProUGUI expensesContent;
+    public Button nextDayButton;
 
     private TimeWarp _timeWarp;
     private DateTime _tomorrow;
@@ -20,6 +25,11 @@ public class GameManager : MonoBehaviour
     {
         _timeWarp = GetComponent<TimeWarp>();
         _fadeToBlack = GameObject.FindGameObjectWithTag(Tags.FadeToBlack).GetComponent<Image>();
+        nextDayButton.onClick.AddListener(() =>
+        {
+            expensesPanel.SetActive(false);
+            GameState.Instance.Days.Value++;
+        });
     }
 
      void Update()
@@ -35,10 +45,12 @@ public class GameManager : MonoBehaviour
         if (TimeWarp.TimeIsWarping)
         {
             // We may be warping due to non-end of day reasons
-            if (tomorrow == _tomorrow)
+            if (tomorrow == _tomorrow && !expensesPanel.activeSelf)
             {
                 // Show expenses window while warping
-                _showExpenses = true;
+                expensesContent.text = string.Join('\n', Expenses.Expenses.GetExpenses()
+                    .Select(x => string.Join('\n', $"{x.Title} = ${x.Cost:n0}", x.Description)));
+                expensesPanel.SetActive(true);
             }
         }
         else if (GameState.Instance.Time.Value.Hour >= endOfDayHour)
