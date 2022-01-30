@@ -75,7 +75,12 @@ namespace Jobs
 
         private void Update()
         {
-            _acceptButton.gameObject.SetActive(_canStartJob);
+            _acceptButton.gameObject.SetActive(_canStartJob && !TimeWarp.TimeIsWarping);
+
+            if (_canStartJob && !TimeWarp.TimeIsWarping && _billboardText.text == successMessage || _billboardText.text == failureMessage)
+            {
+                UpdateBillboard();
+            }
         }
 
         private void UpdateBillboard()
@@ -92,6 +97,8 @@ namespace Jobs
 
         private void Attempt()
         {
+            if (TimeWarp.TimeIsWarping) return;
+            
             if (!IsEnabled) return; 
 
             GameState.Money -= cost;
