@@ -59,10 +59,12 @@ namespace Jobs
         private TextMeshProUGUI _jobAcceptTextMesh;
         private TextMeshPro _billboardText;
 
+        private bool _activeJob = false;
+        
         private TimeWarp _timeWarp;
         private DateTime _jobStartTime = DateTime.MaxValue;
         private bool _jobStarted = false;
-        
+        private bool firstTime = true;
         private void Start()
         {
             _acceptButton = GameObject.FindGameObjectWithTag(Tags.JobAccept).GetComponent<Button>();
@@ -73,7 +75,7 @@ namespace Jobs
             _jobRequiresMesh = GameObject.FindGameObjectWithTag(Tags.JobRequires).GetComponent<TextMeshProUGUI>();
             _jobRewardMesh = GameObject.FindGameObjectWithTag(Tags.JobReward).GetComponent<TextMeshProUGUI>();
             _jobAcceptTextMesh = GameObject.FindGameObjectWithTag(Tags.JobAcceptText).GetComponent<TextMeshProUGUI>();
-            
+       
             _timeWarp = GetComponent<TimeWarp>();
         }
 
@@ -81,6 +83,7 @@ namespace Jobs
         {
             if (other.gameObject.CompareTag(Tags.Player))
             {
+                _activeJob = true;
                 _inTrigger = true;
                 _canStartJob = IsUnlocked && IsEnabled;
 
@@ -92,6 +95,14 @@ namespace Jobs
                 UpdateBillboard();
             }
         }
+
+        // private void OnTriggerStay(Collider other)
+        // {
+        //     if (other.gameObject.CompareTag(Tags.Player))
+        //     {
+        //         _activeJob = true;
+        //     }
+        // }
 
         private void UpdateJobBoard()
         {
@@ -148,6 +159,8 @@ namespace Jobs
         {
             if (other.gameObject.CompareTag(Tags.Player))
             {
+                _activeJob = false;
+                _acceptPanel.gameObject.SetActive(false);
                 _inTrigger = false;
                 _canStartJob = false;
                 Destroy(_billboardInstance);
@@ -156,24 +169,31 @@ namespace Jobs
 
         private void Update()
         {
-            print(IsDisabled);
-            
-            _acceptPanel.gameObject.SetActive(_inTrigger && !TimeWarp.TimeIsWarping);
-            _acceptButton.gameObject.SetActive(_canStartJob && !IsDisabled && !TimeWarp.TimeIsWarping);
-            
-            _jobAcceptTextMesh.gameObject.SetActive(IsDisabled || !_canStartJob && !TimeWarp.TimeIsWarping);
-
-            if (_billboardText != null && _jobStarted && _canStartJob && _jobStartTime + TimeSpan.FromHours(durationInHours) < GameState.Instance.Time.Value)
+            if (firstTime)
             {
-                _jobStarted = false;
-                UpdateBillboard();
-                UpdateJobBoard();
+                firstTime = false;
+                _acceptPanel.gameObject.SetActive(false);
             }
             
-            // if (!_jobStarted && _canStartJob && Input.GetButtonDown("JoyJump"))
-            // {
-            //     Attempt();
-            // }
+            if (_activeJob)
+            {
+                _acceptPanel.gameObject.SetActive(_inTrigger && !TimeWarp.TimeIsWarping);
+                _acceptButton.gameObject.SetActive(_canStartJob && !IsDisabled && !TimeWarp.TimeIsWarping);
+                _jobAcceptTextMesh.gameObject.SetActive(IsDisabled || !_canStartJob && !TimeWarp.TimeIsWarping);
+
+                if (_billboardText != null && _jobStarted && _canStartJob &&
+                    _jobStartTime + TimeSpan.FromHours(durationInHours) < GameState.Instance.Time.Value)
+                {
+                    _jobStarted = false;
+                    UpdateBillboard();
+                    UpdateJobBoard();
+                }
+
+                // if (!_jobStarted && _canStartJob && Input.GetButtonDown("JoyJump"))
+                // {
+                //     Attempt();
+                // }
+            }
         }
 
         private void UpdateBillboard()

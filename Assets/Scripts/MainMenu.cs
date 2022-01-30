@@ -34,7 +34,8 @@ public class MainMenu : MonoBehaviour
 
     private static void Continue()
     {
-        SceneManager.LoadScene("Scenes/MainCityScene");
+        SceneManager.LoadSceneAsync("Scenes/MainCityScene");
+        SceneManager.UnloadSceneAsync("Scenes/MainMenu");
     }
 
     private static void Exit()
