@@ -11,9 +11,12 @@ public class TimeWarp : MonoBehaviour
 
     public void SkipUntil(DateTime endTime)
     {
-        TimeIsWarping = true;
-        GameState.Instance.Time.Factor = warpSpeed;
-        StartCoroutine(nameof(Warp), endTime);
+        if (!TimeIsWarping)
+        {
+            TimeIsWarping = true;
+            GameState.Instance.Time.Factor = warpSpeed;
+            StartCoroutine(nameof(Warp), endTime);
+        }
     }
 
     public void SkipTimeForDuration(TimeSpan duration)
