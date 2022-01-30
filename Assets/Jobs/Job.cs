@@ -23,7 +23,6 @@ namespace Jobs
         public string successMessage;
         public string failureMessage;
         
-   
         
         public string JobActionText;
 
@@ -43,11 +42,15 @@ namespace Jobs
         private DateTime _disabledUntil;
         private GameObject _billboardInstance;
         private bool _canStartJob;
+        private bool _inTrigger;
 
         private Button _acceptButton;
         private GameObject _acceptPanel;
-        private TextMeshProUGUI _acceptContent;
-        private TextMeshProUGUI _acceptTitle;
+        private TextMeshProUGUI _jobContentMesh;
+        private TextMeshProUGUI _jobTitleMesh;
+        private TextMeshProUGUI _jobDurationMesh;
+        private TextMeshProUGUI _jobRequiresMesh;
+        private TextMeshProUGUI _jobRewardMesh;
         private TextMeshPro _billboardText;
 
         private TimeWarp _timeWarp;
@@ -57,8 +60,11 @@ namespace Jobs
         {
             _acceptButton = GameObject.FindGameObjectWithTag(Tags.JobAccept).GetComponent<Button>();
             _acceptPanel = GameObject.FindGameObjectWithTag(Tags.JobPanel);
-            _acceptContent = GameObject.FindGameObjectWithTag(Tags.JobContent).GetComponent<TextMeshProUGUI>();
-            _acceptTitle = GameObject.FindGameObjectWithTag(Tags.JobTitle).GetComponent<TextMeshProUGUI>();
+            _jobContentMesh = GameObject.FindGameObjectWithTag(Tags.JobContent).GetComponent<TextMeshProUGUI>();
+            _jobTitleMesh = GameObject.FindGameObjectWithTag(Tags.JobTitle).GetComponent<TextMeshProUGUI>();
+            _jobDurationMesh = GameObject.FindGameObjectWithTag(Tags.JobDuration).GetComponent<TextMeshProUGUI>();
+            _jobRequiresMesh = GameObject.FindGameObjectWithTag(Tags.JobRequires).GetComponent<TextMeshProUGUI>();
+            _jobRewardMesh = GameObject.FindGameObjectWithTag(Tags.JobReward).GetComponent<TextMeshProUGUI>();
             
             _timeWarp = GetComponent<TimeWarp>();
         }
@@ -67,14 +73,39 @@ namespace Jobs
         {
             if (other.gameObject.CompareTag(Tags.Player))
             {
+                _inTrigger = true;
+                _canStartJob = IsUnlocked && IsEnabled;
+
                 _acceptButton.onClick.RemoveAllListeners();
                 _acceptButton.onClick.AddListener(Attempt);
                 _acceptButton.GetComponentInChildren<TextMeshProUGUI>().text = JobActionText;
-                _acceptContent.text = JobDescription;
-                _acceptTitle.text = JobTitle;
-                
-                _canStartJob = IsUnlocked && IsEnabled;
+                _jobContentMesh.text = JobDescription;
+                _jobTitleMesh.text = JobTitle;
 
+                _jobDurationMesh.text = $"Takes:\n <color=orange><b>{durationInHours}</b></color> hours";
+                
+                _jobRequiresMesh.text = "Requires:\n";
+                foreach (var require in unlockRequirements)
+                {
+                    if (require.IsMet())
+                    {
+                        _jobRequiresMesh.text += $"<color=green><b>{require.value}</b></color> {require.skill}\n";
+
+                    }
+                    else
+                    {
+                        _jobRequiresMesh.text += $"<color=red><b>{require.value}</b></color> {require.skill}\n";
+
+                    }
+                }
+                
+                _jobRewardMesh.text = "Reward:\n";
+                foreach (var reward in rewards)
+                {
+                    _jobRewardMesh.text += $"<color=green><b>{reward.value}</b></color> {reward.type}\n";
+                }
+                
+         
                 _billboardInstance = Instantiate(billboard, transform);
                 _billboardInstance.transform.localPosition = new Vector3(0, 2, 0);
                 _billboardText = _billboardInstance.GetComponent<TextMeshPro>();
@@ -86,6 +117,7 @@ namespace Jobs
         {
             if (other.gameObject.CompareTag(Tags.Player))
             {
+                _inTrigger = false;
                 _canStartJob = false;
                 Destroy(_billboardInstance);
             }
@@ -93,7 +125,8 @@ namespace Jobs
 
         private void Update()
         {
-            _acceptPanel.gameObject.SetActive(_canStartJob && !TimeWarp.TimeIsWarping);
+            _acceptPanel.gameObject.SetActive(_inTrigger && !TimeWarp.TimeIsWarping);
+            _acceptButton.gameObject.SetActive(_canStartJob && !TimeWarp.TimeIsWarping);
 
             if (_billboardText != null && _canStartJob && _jobStartTime + TimeSpan.FromHours(durationInHours) < GameState.Instance.Time.Value)
             {

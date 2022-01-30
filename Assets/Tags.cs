@@ -8,6 +8,9 @@
     public const string JobPanel = "JobPanel";
     public const string JobContent = "JobContent";
     public const string JobTitle = "JobTitle";
+    public const string JobDuration = "JobDuration";
+    public const string JobRequires = "JobRequires";
+    public const string JobReward = "JobReward";
     public const string Home = "Home";
     public const string FadeToBlack = "FadeToBlack";
 }
