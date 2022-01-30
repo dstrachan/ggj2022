@@ -9,6 +9,12 @@ TagManager:
   - JobAccept
   - Home
   - FadeToBlack
+  - JobContent
+  - JobPanel
+  - JobTitle
+  - JobDuration
+  - JobRequires
+  - JobReward
   layers:
   - Default
   - TransparentFX
