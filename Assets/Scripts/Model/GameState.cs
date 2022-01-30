@@ -57,6 +57,11 @@ namespace Model
             Load();
         }
 
+        public static bool HasSaveGame()
+        {
+            return File.Exists(DataFile);
+        }
+
         private static GameState Load()
         {
             GameState gameState = null;
