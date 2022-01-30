@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public Button nextDayButton;
     public AudioClip CashRegister;
     public GameObject gameOverPanel;
+    public TextMeshProUGUI gameOverMessage;
     public Button mainMenuButton;
 
     private TimeWarp _timeWarp;
@@ -102,6 +103,8 @@ public class GameManager : MonoBehaviour
         if (GameState.Instance.Money < 0 || GameState.Instance.Family < 0)
         {
             gameOverPanel.SetActive(true);
+            gameOverMessage.text =
+                GameState.Instance.Money < 0 ? "You ran out of money!" : "You neglected your family!";
             mainMenuButton.gameObject.SetActive(true);
         }
         else
