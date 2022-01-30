@@ -12,11 +12,18 @@ namespace Jobs
     [RequireComponent(typeof(Collider))]
     public class Job : MonoBehaviour
     {
+        public string JobTitle;
+        
+        [TextArea(4,10)]
+        public string JobDescription;
+        
         public string lockedMessage;
         public string disabledMessage;
         public string enabledMessage;
         public string successMessage;
         public string failureMessage;
+        
+   
         
         public string JobActionText;
 
@@ -38,6 +45,9 @@ namespace Jobs
         private bool _canStartJob;
 
         private Button _acceptButton;
+        private GameObject _acceptPanel;
+        private TextMeshProUGUI _acceptContent;
+        private TextMeshProUGUI _acceptTitle;
         private TextMeshPro _billboardText;
 
         private TimeWarp _timeWarp;
@@ -46,6 +56,10 @@ namespace Jobs
         private void Start()
         {
             _acceptButton = GameObject.FindGameObjectWithTag(Tags.JobAccept).GetComponent<Button>();
+            _acceptPanel = GameObject.FindGameObjectWithTag(Tags.JobPanel);
+            _acceptContent = GameObject.FindGameObjectWithTag(Tags.JobContent).GetComponent<TextMeshProUGUI>();
+            _acceptTitle = GameObject.FindGameObjectWithTag(Tags.JobTitle).GetComponent<TextMeshProUGUI>();
+            
             _timeWarp = GetComponent<TimeWarp>();
         }
 
@@ -56,6 +70,8 @@ namespace Jobs
                 _acceptButton.onClick.RemoveAllListeners();
                 _acceptButton.onClick.AddListener(Attempt);
                 _acceptButton.GetComponentInChildren<TextMeshProUGUI>().text = JobActionText;
+                _acceptContent.text = JobDescription;
+                _acceptTitle.text = JobTitle;
                 
                 _canStartJob = IsUnlocked && IsEnabled;
 
@@ -77,7 +93,7 @@ namespace Jobs
 
         private void Update()
         {
-            _acceptButton.gameObject.SetActive(_canStartJob && !TimeWarp.TimeIsWarping);
+            _acceptPanel.gameObject.SetActive(_canStartJob && !TimeWarp.TimeIsWarping);
 
             if (_billboardText != null && _canStartJob && _jobStartTime + TimeSpan.FromHours(durationInHours) < GameState.Instance.Time.Value)
             {
