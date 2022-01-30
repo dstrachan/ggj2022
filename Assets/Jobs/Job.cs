@@ -97,7 +97,7 @@ namespace Jobs
         {
             _acceptButton.onClick.RemoveAllListeners();  
             _acceptButton.onClick.AddListener(Attempt);
-            _acceptButton.GetComponentInChildren<TextMeshProUGUI>().text = JobActionText;
+            _acceptButton.GetComponentInChildren<TextMeshProUGUI>().text = $"(A) {JobActionText}";
             
             print(IsDisabled);
             if (IsDisabled)
