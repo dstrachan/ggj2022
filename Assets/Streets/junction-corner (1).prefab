@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4484952029291552719}
   m_Layer: 0
   m_Name: junction-corner (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2683367385560825370}
   m_LocalRotation: {x: 0, y: -0.70710677, z: -0.70710677, w: 0}
   m_LocalPosition: {x: -73, y: -1, z: 146}
-  m_LocalScale: {x: 1, y: 1, z: 0.100000024}
+  m_LocalScale: {x: 1, y: 1, z: 0.10000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

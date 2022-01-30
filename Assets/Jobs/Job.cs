@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 namespace Jobs
 {
     [RequireComponent(typeof(TimeWarp))]
+    [RequireComponent(typeof(Collider))]
     public class Job : MonoBehaviour
     {
         public string lockedMessage;
