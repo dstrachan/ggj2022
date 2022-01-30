@@ -169,7 +169,7 @@ namespace Jobs
                 UpdateJobBoard();
             }
             
-            if (Input.GetButton("JoyJump"))
+            if (Input.GetButtonDown("JoyJump"))
             {
                 Attempt();
             }
