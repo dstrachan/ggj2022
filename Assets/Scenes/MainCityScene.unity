@@ -748,6 +748,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dealer Weed
       objectReference: {fileID: 0}
+    - target: {fileID: 2066239141332374090, guid: 4ac147234c599874392a517f7edd816d, type: 3}
+      propertyPath: durationInHours
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066239141332374090, guid: 4ac147234c599874392a517f7edd816d, type: 3}
+      propertyPath: rewards.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066239141332374090, guid: 4ac147234c599874392a517f7edd816d, type: 3}
+      propertyPath: rewards.Array.data[1].type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066239141332374090, guid: 4ac147234c599874392a517f7edd816d, type: 3}
+      propertyPath: rewards.Array.data[0].value
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066239141332374090, guid: 4ac147234c599874392a517f7edd816d, type: 3}
+      propertyPath: rewards.Array.data[1].value
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066239141332374090, guid: 4ac147234c599874392a517f7edd816d, type: 3}
+      propertyPath: successRequirements.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066239141332374090, guid: 4ac147234c599874392a517f7edd816d, type: 3}
+      propertyPath: successRequirements.Array.data[0].skill
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066239141332374090, guid: 4ac147234c599874392a517f7edd816d, type: 3}
+      propertyPath: successRequirements.Array.data[0].value
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2066239141332374101, guid: 4ac147234c599874392a517f7edd816d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -14876,6 +14908,7 @@ Transform:
   - {fileID: 2103692224}
   - {fileID: 1810284846}
   - {fileID: 543450652368437950}
+  - {fileID: 1104806401}
   - {fileID: 1008143134}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -16168,7 +16201,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6405335070027357934, guid: 8f75a6e8eb70056498611162516cd3a4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17403,6 +17436,109 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3593730438825761205, guid: 93972e283ea052c43b737f472fe894d7, type: 3}
   m_PrefabInstance: {fileID: 3915255036010499243}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1104806400
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 923225502}
+    m_Modifications:
+    - target: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 82.103
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 60.92474
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975921, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: m_Name
+      value: Warehouse Job
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: JobActionText
+      value: Work Hard
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: lockedMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: JobDescription
+      value: Work a hard shift at corpo warehouse. Those boxes aren't going to deliver
+        themselves!
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: enabledMessage
+      value: No Toilet breaks!
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: failureMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: successMessage
+      value: Here is your wage, work harder next time.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: disabledMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: durationInHours
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: rewards.Array.data[0].value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580935994035975922, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+      propertyPath: successRequirements.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+--- !u!4 &1104806401 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3580935994035975917, guid: 611f96bcb02e9cf4aac5bc9e5ce985f5, type: 3}
+  m_PrefabInstance: {fileID: 1104806400}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1105727431
 PrefabInstance:
