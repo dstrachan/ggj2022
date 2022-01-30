@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         var tomorrow = Time.FirstDay.AddDays(GameState.Instance.Days.Value + 1);
         
-        if (!_endOfDay && !mainMenuButton.isActiveAndEnabled && !TimeWarp.TimeIsWarping && (GameState.Instance.Time.Value.Hour >= endOfDayHour && GameState.Instance.Time.Value < tomorrow || GameState.Instance.Time.Value.Hour < 8 && GameState.Instance.Time.Value < tomorrow))
+        if (!_endOfDay && !mainMenuButton.isActiveAndEnabled && !TimeWarp.TimeIsWarping && ((GameState.Instance.Time.Value.Hour >= endOfDayHour && GameState.Instance.Time.Value < tomorrow) || (GameState.Instance.Time.Value.Hour < 8 && GameState.Instance.Time.Value < tomorrow)))
         {
             EndOfDay();
         }
@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
         if (_nextDay) return;
         _nextDay = true;
         StartCoroutine(nameof(ShowNextDay));
+     
     }
 
     private void EndOfDay()
@@ -117,9 +118,12 @@ public class GameManager : MonoBehaviour
         else
         {
             yield return FadeIn();
+            GameState.Instance.Days.Value++;
             _wifeAudio.Play();
             _nextDay = false;
         }
+        _endOfDay = false;
+        
     }
 
     private IEnumerator ShowEndOfDay()
@@ -191,6 +195,7 @@ public class GameManager : MonoBehaviour
 
         nextDayButton.gameObject.SetActive(true);
         _player.position = _homePosition.position;
+        
     }
 
     private void HideExpenses()
