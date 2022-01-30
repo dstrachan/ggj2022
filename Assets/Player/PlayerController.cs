@@ -24,13 +24,13 @@ namespace Player
             {
                 var mouseInputX = Input.GetAxis("Horizontal");
                 var mouseinputY = Input.GetAxis("Vertical");
-                var mouseAction = Input.GetAxis("Jump") > 0.5f;
+                var mouseAction = Input.GetButton("Jump");
                 bool usingMouse = mouseInputX != 0 || mouseinputY != 0 || mouseAction;
                 var joyLInputX = Input.GetAxis("LJoyHorizontal");
                 var joyLInputY = Input.GetAxis("LJoyVertical");
                 // var joyRInputX = Input.GetAxis("RJoyHorizontal");
                 // var joyRInputY = Input.GetAxis("RJoyVertical");
-                var joyinputAction = Input.GetAxis("JoyJump") > 0.5f;
+                var joyinputAction = Input.GetButton("JoyJump");
                 bool usingJoy = joyLInputX != 0
                                 || joyLInputY != 0
                                 // || joyRInputY != 0

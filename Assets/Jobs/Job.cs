@@ -78,7 +78,7 @@ namespace Jobs
 
                 _acceptButton.onClick.RemoveAllListeners();
                 _acceptButton.onClick.AddListener(Attempt);
-                _acceptButton.GetComponentInChildren<TextMeshProUGUI>().text = JobActionText;
+                _acceptButton.GetComponentInChildren<TextMeshProUGUI>().text = "(A) " + JobActionText;
                 _jobContentMesh.text = JobDescription;
                 _jobTitleMesh.text = JobTitle;
 
@@ -131,6 +131,11 @@ namespace Jobs
             if (_billboardText != null && _canStartJob && _jobStartTime + TimeSpan.FromHours(durationInHours) < GameState.Instance.Time.Value)
             {
                 UpdateBillboard();
+            }
+
+            if (Input.GetButton("JoyJump"))
+            {
+                Attempt();
             }
         }
 
