@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (nextDayButton.enabled && Input.GetButton("JoyJump"))
+        if (nextDayButton.enabled && Input.GetButtonDown("JoyJump"))
         {
             AdvanceDay();
         }

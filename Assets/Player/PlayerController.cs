@@ -30,7 +30,7 @@ namespace Player
                 var joyLInputY = Input.GetAxis("LJoyVertical");
                 // var joyRInputX = Input.GetAxis("RJoyHorizontal");
                 // var joyRInputY = Input.GetAxis("RJoyVertical");
-                var joyinputAction = Input.GetButton("JoyJump");
+                var joyinputAction = Input.GetButtonDown("JoyJump");
                 bool usingJoy = joyLInputX != 0
                                 || joyLInputY != 0
                                 // || joyRInputY != 0
