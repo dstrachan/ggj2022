@@ -15,6 +15,7 @@ TagManager:
   - JobDuration
   - JobRequires
   - JobReward
+  - JobAcceptText
   layers:
   - Default
   - TransparentFX
