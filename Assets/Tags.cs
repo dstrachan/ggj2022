@@ -14,4 +14,5 @@
     public const string JobAcceptText = "JobAcceptText";
     public const string Home = "Home";
     public const string FadeToBlack = "FadeToBlack";
+    public const string Wife = "Wife";
 }

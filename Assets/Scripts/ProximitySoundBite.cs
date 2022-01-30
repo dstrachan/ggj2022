@@ -2,27 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Model;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Time = UnityEngine.Time;
 
-[RequireComponent(typeof(AudioSource))]
-public class ProximitySoundBite : MonoBehaviour
+public class ProximitySoundBite : RansomSoundBite
 {
-    public List<AudioClip> Sounds;
     public float Cooldown = 5;
 
     // Next time at which we allow playing a sound bite.
     private float ReadyTime = 0;
-    private AudioSource AudioSource;
     
     // Time it takes to scale up when starting/stopping sound
     public float ScaleTime = 0.5f;
     
     // Start is called before the first frame update
-    void Start()
+    protected new void Start()
     {
-        AudioSource = GetComponent<AudioSource>();
+        base.Start();
     }
 
     void Update()
@@ -51,10 +49,8 @@ public class ProximitySoundBite : MonoBehaviour
         if (other.CompareTag(Tags.Player) && Time.time >= ReadyTime)
         {
             // Play the sound
-            var audioClip = Sounds[Random.Range(0, Sounds.Count)];
+            var audioClip = Play();
             ReadyTime = Time.time + Cooldown + audioClip.length;
-            AudioSource.clip = audioClip;
-            AudioSource.Play();
         }
     }
 }
