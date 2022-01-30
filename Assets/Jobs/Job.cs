@@ -40,6 +40,7 @@ namespace Jobs
         private TextMeshPro _billboardText;
 
         private TimeWarp _timeWarp;
+        private DateTime _jobStartTime;
         
         private void Start()
         {
@@ -77,7 +78,7 @@ namespace Jobs
         {
             _acceptButton.gameObject.SetActive(_canStartJob && !TimeWarp.TimeIsWarping);
 
-            if (_canStartJob && !TimeWarp.TimeIsWarping && _billboardText.text == successMessage || _billboardText.text == failureMessage)
+            if (_billboardText != null && _canStartJob && _jobStartTime + TimeSpan.FromHours(durationInHours) < GameState.Instance.Time.Value)
             {
                 UpdateBillboard();
             }
@@ -87,10 +88,12 @@ namespace Jobs
         {
             if (IsUnlocked)
             {
+                _billboardText.color = Color.white;
                 _billboardText.text = IsEnabled ? enabledMessage : disabledMessage;
             }
             else
             {
+                _billboardText.color = Color.gray;
                 _billboardText.text = lockedMessage;
             }
         }
@@ -102,6 +105,9 @@ namespace Jobs
             if (!IsEnabled) return; 
 
             GameState.Money -= cost;
+            
+            _jobStartTime = GameState.Instance.Time.Value;
+            
             _timeWarp.SkipTimeForDuration(TimeSpan.FromHours(durationInHours));
 
             var success = successRequirements.All(x => x.Attempt());
