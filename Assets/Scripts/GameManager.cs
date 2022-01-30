@@ -4,6 +4,7 @@ using System.Linq;
 using Model;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Time = Model.Time;
 
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI endOfDayMessage;
     public Button nextDayButton;
     public AudioClip CashRegister;
+    public GameObject gameOverPanel;
+    public Button mainMenuButton;
 
     private TimeWarp _timeWarp;
     private DateTime _tomorrow;
@@ -33,10 +36,12 @@ public class GameManager : MonoBehaviour
 
     private long _pendingExpenses;
     private int _pendingFamily;
-    private bool _isShowing;
 
     private AudioSource _audioSource;
     private RansomSoundBite _wifeAudio;
+    private bool _gameOver;
+    private bool _endOfDay;
+    private bool _nextDay;
 
     private void Start()
     {
@@ -45,62 +50,91 @@ public class GameManager : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<Transform>();
         _fadeToBlack = GameObject.FindGameObjectWithTag(Tags.FadeToBlack).GetComponent<Image>();
         _audioSource = GetComponent<AudioSource>();
-        nextDayButton.onClick.AddListener(AdvanceDay);
+        nextDayButton.onClick.AddListener(NextDay);
+        mainMenuButton.onClick.AddListener(MainMenu);
         expensesMoney.text = string.Empty;
         expensesFamily.text = string.Empty;
         _wifeAudio = GameObject.FindWithTag(Tags.Wife).GetComponent<RansomSoundBite>();
         _wifeAudio.Play();
     }
 
-    private void AdvanceDay()
-    {
-        HideExpenses();
-        _fading = true;
-        StartCoroutine(nameof(FadeIn));
-        GameState.Instance.Days.Value++;
-        _wifeAudio.Play();
-    }
-
     private void Update()
     {
-        if (GameState.Instance.Time.Value.Hour >= endOfDayHour)
+        if (!_endOfDay && !mainMenuButton.isActiveAndEnabled && GameState.Instance.Time.Value.Hour >= endOfDayHour)
         {
-            // Start warping
-            _tomorrow = Time.FirstDay.AddDays(GameState.Instance.Days.Value + 1);
-            _timeWarp.SkipUntil(_tomorrow);
-
-            if (!_fading)
-            {
-                _fading = true;
-                endOfDayMessage.enabled = true;
-                StartCoroutine(nameof(FadeOut));
-            }
+            EndOfDay();
         }
 
-        if (nextDayButton.isActiveAndEnabled && Input.GetButtonDown("JoyJump"))
+        if (!_nextDay && nextDayButton.isActiveAndEnabled && Input.GetButtonDown("JoyJump"))
         {
-            AdvanceDay();
+            NextDay();
+        }
+
+        if (!_nextDay && mainMenuButton.isActiveAndEnabled && Input.GetButtonDown("JoyJump"))
+        {
+            MainMenu();
         }
     }
 
-    private void LateUpdate()
+    private static void MainMenu()
     {
+        SceneManager.LoadScene("Scenes/MainMenu");
+    }
+
+    private void NextDay()
+    {
+        if (_nextDay) return;
+        _nextDay = true;
+        StartCoroutine(nameof(ShowNextDay));
+    }
+
+    private void EndOfDay()
+    {
+        if (_endOfDay) return;
+        _endOfDay = true;
+        StartCoroutine(nameof(ShowEndOfDay));
+    }
+
+    private IEnumerator ShowNextDay()
+    {
+        HideExpenses();
+
         if (GameState.Instance.Money < 0 || GameState.Instance.Family < 0)
         {
-            throw new NotImplementedException(); // TODO: game over
+            gameOverPanel.SetActive(true);
+            mainMenuButton.gameObject.SetActive(true);
         }
+        else
+        {
+            yield return FadeIn();
+            _wifeAudio.Play();
+            _nextDay = false;
+        }
+    }
+
+    private IEnumerator ShowEndOfDay()
+    {
+        _timeWarp.SkipUntil(Time.FirstDay.AddDays(GameState.Instance.Days.Value + 1));
+        endOfDayMessage.enabled = true;
+
+        yield return FadeOut();
+
+        endOfDayMessage.enabled = false;
+
+        yield return ShowExpenses();
+
+        _endOfDay = false;
     }
 
     private IEnumerator FadeIn()
     {
+        print("FadeIn");
         for (var i = 0; i < 100; i++)
         {
             _fadeToBlack.color = new Color(_fadeToBlack.color.r, _fadeToBlack.color.g, _fadeToBlack.color.b,
                 1 - i / 100f);
             yield return new WaitForSeconds(0.04f);
         }
-
-        _fading = false;
     }
 
     private IEnumerator FadeOut()
@@ -110,19 +144,10 @@ public class GameManager : MonoBehaviour
             _fadeToBlack.color = new Color(_fadeToBlack.color.r, _fadeToBlack.color.g, _fadeToBlack.color.b, i / 100f);
             yield return new WaitForSeconds(0.04f);
         }
-
-        endOfDayMessage.enabled = false;
-
-        _player.position = _homePosition.position;
-
-        yield return ShowExpenses();
-
-        _fading = false;
     }
 
     private IEnumerator ShowExpenses()
     {
-        _isShowing = true;
         expensesPanel.SetActive(true);
 
         var expenses = Expenses.Expenses.GetExpenses();
@@ -158,7 +183,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         nextDayButton.gameObject.SetActive(true);
-        _isShowing = false;
     }
 
     private void HideExpenses()
@@ -181,7 +205,7 @@ public class GameManager : MonoBehaviour
 
     private void OnGUI()
     {
-        if (_isShowing)
+        if (_showExpenses)
         {
             expenseScrollbar.value = 0;
         }
