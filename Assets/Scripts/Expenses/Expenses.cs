@@ -72,7 +72,8 @@ namespace Expenses
 
             // Record recurring expenses
             // TODO we probably want to group by expense title and sum up costs. And sort by title?
-            return recurring.Concat(oneOff).ToList();
+            // TODO: Remove extra concats, this was just for testing
+            return recurring.Concat(recurring).Concat(recurring).Concat(recurring).Concat(oneOff).ToList();
         }
 
         private static bool Chance(float probabilityOfTrue)
