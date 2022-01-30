@@ -132,9 +132,9 @@ public class GameManager : MonoBehaviour
         remaining = family - _pendingFamily;
         color = remaining > 0 ? "green" : "red";
         expensesFamily.text = $@"<b>Family</b>
-<color=green>${family:n0}</color>
-<color=red>-${_pendingFamily:n0}</color>
-= <color={color}>${remaining}</color>";
+<color=green>{family:n0}</color>
+<color=red>-{_pendingFamily:n0}</color>
+= <color={color}>{remaining}</color>";
 
         yield return new WaitForSeconds(1);
 
