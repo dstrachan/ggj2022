@@ -21,8 +21,11 @@ public class RansomSoundBite : MonoBehaviour
     public AudioClip Play()
     {
         var audioClip = Sounds[Random.Range(0, Sounds.Count)];
-        AudioSource.clip = audioClip;
-        AudioSource.Play();
+        if (AudioSource != null)
+        {
+            AudioSource.clip = audioClip;
+            AudioSource.Play();
+        }
         return audioClip;
     }
 }
