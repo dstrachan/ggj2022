@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using Time = Model.Time;
 
 [RequireComponent(typeof(TimeWarp))]
+[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
     public int endOfDayHour;
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public Scrollbar expenseScrollbar;
     public TextMeshProUGUI endOfDayMessage;
     public Button nextDayButton;
+    public AudioClip CashRegister;
 
     private TimeWarp _timeWarp;
     private DateTime _tomorrow;
@@ -31,12 +33,15 @@ public class GameManager : MonoBehaviour
     private long _pendingExpenses;
     private bool _isShowing;
 
+    private AudioSource _audioSource;
+
     private void Start()
     {
         _timeWarp = GetComponent<TimeWarp>();
         _homePosition = GameObject.FindGameObjectWithTag(Tags.Home).GetComponent<Transform>();
         _player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<Transform>();
         _fadeToBlack = GameObject.FindGameObjectWithTag(Tags.FadeToBlack).GetComponent<Image>();
+        _audioSource = GetComponent<AudioSource>();
         nextDayButton.onClick.AddListener(AdvanceDay);
         expensesTotal.text = string.Empty;
     }
@@ -106,11 +111,13 @@ public class GameManager : MonoBehaviour
         expensesPanel.SetActive(true);
 
         var expenses = Expenses.Expenses.GetExpenses();
+        _audioSource.clip = CashRegister;
         foreach (var (cost, title, description) in expenses)
         {
             yield return new WaitForSeconds(0.5f);
             var obj = Instantiate(expenseItemPrefab, expensesContent);
             obj.text = $"<b>{title}</b> <color=red>-${cost}</color>\n<size=16>{description}</size>";
+            _audioSource.Play();
         }
 
         yield return new WaitForSeconds(1);
