@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     private bool _isShowing;
 
     private AudioSource _audioSource;
+    private RansomSoundBite _wifeAudio;
 
     private void Start()
     {
@@ -47,6 +48,8 @@ public class GameManager : MonoBehaviour
         nextDayButton.onClick.AddListener(AdvanceDay);
         expensesMoney.text = string.Empty;
         expensesFamily.text = string.Empty;
+        _wifeAudio = GameObject.FindWithTag(Tags.Wife).GetComponent<RansomSoundBite>();
+        _wifeAudio.Play();
     }
 
     private void AdvanceDay()
@@ -55,6 +58,7 @@ public class GameManager : MonoBehaviour
         _fading = true;
         StartCoroutine(nameof(FadeIn));
         GameState.Instance.Days.Value++;
+        _wifeAudio.Play();
     }
 
     private void Update()
