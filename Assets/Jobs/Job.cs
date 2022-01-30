@@ -168,7 +168,7 @@ namespace Jobs
                 UpdateJobBoard();
             }
             
-            if (Input.GetButtonDown("JoyJump"))
+            if (!_jobStarted && _canStartJob && Input.GetButtonDown("JoyJump"))
             {
                 Attempt();
             }

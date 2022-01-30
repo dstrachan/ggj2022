@@ -8,16 +8,19 @@ using UnityEngine.UI;
 using Time = Model.Time;
 
 [RequireComponent(typeof(TimeWarp))]
+[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
     public int endOfDayHour;
     public GameObject expensesPanel;
     public Transform expensesContent;
     public TextMeshProUGUI expenseItemPrefab;
-    public TextMeshProUGUI expensesTotal;
+    public TextMeshProUGUI expensesMoney;
+    public TextMeshProUGUI expensesFamily;
     public Scrollbar expenseScrollbar;
     public TextMeshProUGUI endOfDayMessage;
     public Button nextDayButton;
+    public AudioClip CashRegister;
 
     private TimeWarp _timeWarp;
     private DateTime _tomorrow;
@@ -29,7 +32,10 @@ public class GameManager : MonoBehaviour
     private Transform _player;
 
     private long _pendingExpenses;
+    private int _pendingFamily;
     private bool _isShowing;
+
+    private AudioSource _audioSource;
 
     private void Start()
     {
@@ -37,8 +43,10 @@ public class GameManager : MonoBehaviour
         _homePosition = GameObject.FindGameObjectWithTag(Tags.Home).GetComponent<Transform>();
         _player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<Transform>();
         _fadeToBlack = GameObject.FindGameObjectWithTag(Tags.FadeToBlack).GetComponent<Image>();
+        _audioSource = GetComponent<AudioSource>();
         nextDayButton.onClick.AddListener(AdvanceDay);
-        expensesTotal.text = string.Empty;
+        expensesMoney.text = string.Empty;
+        expensesFamily.text = string.Empty;
     }
 
     private void AdvanceDay()
@@ -65,9 +73,17 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (nextDayButton.enabled && Input.GetButtonDown("JoyJump"))
+        if (nextDayButton.isActiveAndEnabled && Input.GetButtonDown("JoyJump"))
         {
             AdvanceDay();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (GameState.Instance.Money < 0 || GameState.Instance.Family < 0)
+        {
+            throw new NotImplementedException(); // TODO: game over
         }
     }
 
@@ -106,11 +122,13 @@ public class GameManager : MonoBehaviour
         expensesPanel.SetActive(true);
 
         var expenses = Expenses.Expenses.GetExpenses();
+        _audioSource.clip = CashRegister;
         foreach (var (cost, title, description) in expenses)
         {
             yield return new WaitForSeconds(0.5f);
             var obj = Instantiate(expenseItemPrefab, expensesContent);
             obj.text = $"<b>{title}</b> <color=red>-${cost}</color>\n<size=16>{description}</size>";
+            _audioSource.Play();
         }
 
         yield return new WaitForSeconds(1);
@@ -119,9 +137,19 @@ public class GameManager : MonoBehaviour
         _pendingExpenses = expenses.Sum(x => x.Cost);
         var remaining = money - _pendingExpenses;
         var color = remaining > 0 ? "green" : "red";
-        expensesTotal.text = @$"<color=green>${GameState.Instance.Money:n0}</color>
-<color=red>-${expenses.Sum(x => x.Cost):n0}</color>
+        expensesMoney.text = @$"<b>Money</b>
+<color=green>${money:n0}</color>
+<color=red>-${_pendingExpenses:n0}</color>
 = <color={color}>${remaining}</color>";
+
+        var family = GameState.Instance.Family;
+        _pendingFamily = 10;
+        remaining = family - _pendingFamily;
+        color = remaining > 0 ? "green" : "red";
+        expensesFamily.text = $@"<b>Family</b>
+<color=green>{family:n0}</color>
+<color=red>-{_pendingFamily:n0}</color>
+= <color={color}>{remaining}</color>";
 
         yield return new WaitForSeconds(1);
 
@@ -137,11 +165,14 @@ public class GameManager : MonoBehaviour
         }
 
         expensesPanel.SetActive(false);
-        expensesTotal.text = string.Empty;
+        expensesMoney.text = string.Empty;
+        expensesFamily.text = string.Empty;
         nextDayButton.gameObject.SetActive(false);
 
         GameState.Instance.Money -= _pendingExpenses;
+        GameState.Instance.Family -= _pendingFamily;
         _pendingExpenses = 0;
+        _pendingFamily = 0;
     }
 
     private void OnGUI()

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Model;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,18 +10,16 @@ public class MainMenu : MonoBehaviour
     public Button ContinueButton;
     public Button ExitButton;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        NewGameButton.onClick.AddListener(NewGame);   
+        NewGameButton.onClick.AddListener(NewGame);
         ContinueButton.onClick.AddListener(Continue);
         ExitButton.onClick.AddListener(Exit);
 
         ContinueButton.enabled = GameState.HasSaveGame();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetButtonDown("JoyJump"))
         {
@@ -31,18 +27,18 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void NewGame()
+    private static void NewGame()
     {
-        throw new Exception("TODO reset state then");
+        GameState.Instance.Reset();
         Continue();
     }
 
-    private void Continue()
+    private static void Continue()
     {
         SceneManager.LoadScene("Scenes/MainCityScene");
     }
 
-    private void Exit()
+    private static void Exit()
     {
         Application.Quit();
     }
