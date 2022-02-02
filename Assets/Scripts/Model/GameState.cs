@@ -40,7 +40,7 @@ namespace Model
             Strength.Reset();
             Intelligence.Reset();
             Charisma.Reset();
-            Money = 50;
+            Money = 500;
             Family = 50;
         }
 
@@ -51,7 +51,7 @@ namespace Model
             Strength.Reset();
             Intelligence.Reset();
             Charisma.Reset();
-            Money = 50;
+            Money = 500;
             Family = 50;
 
             Save();

@@ -8,7 +8,7 @@ namespace Model
         public long Xp { get; set; }
 
         [JsonIgnore]
-        public double Value => Math.Pow(Math.Log10(Xp + 1), 3) + 1;
+        public double Value => Math.Pow(Math.Log10(Xp + 1), 3) + 100;
 
         public void Reset()
         {

@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour
         }
         _endOfDay = false;
         
+        
     }
 
     private IEnumerator ShowEndOfDay()
@@ -148,8 +149,7 @@ public class GameManager : MonoBehaviour
         print("FadeIn");
         for (var i = 0; i < 100; i++)
         {
-            _fadeToBlack.color = new Color(_fadeToBlack.color.r, _fadeToBlack.color.g, _fadeToBlack.color.b,
-                1 - i / 100f);
+            _fadeToBlack.color = new Color(_fadeToBlack.color.r, _fadeToBlack.color.g, _fadeToBlack.color.b, 1 - i / 100f);
             yield return new WaitForSeconds(0.04f);
         }
     }
@@ -161,6 +161,8 @@ public class GameManager : MonoBehaviour
             _fadeToBlack.color = new Color(_fadeToBlack.color.r, _fadeToBlack.color.g, _fadeToBlack.color.b, i / 100f);
             yield return new WaitForSeconds(0.04f);
         }
+        
+        _player.position = _homePosition.position;
     }
 
     private IEnumerator ShowExpenses()
@@ -200,8 +202,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         nextDayButton.gameObject.SetActive(true);
-        _player.position = _homePosition.position;
-        
+
     }
 
     private void HideExpenses()
