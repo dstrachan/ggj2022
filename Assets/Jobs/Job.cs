@@ -239,11 +239,20 @@ namespace Jobs
             var success = successRequirements.All(x => x.Attempt());
             if (success)
             {
-                foreach (var reward in rewards)
+                if (rewards.Any())
                 {
-                    _billboardText.color = Color.green;
-                    _billboardText.text = successMessage;
-                    reward.Give();
+                    foreach (var reward in rewards)
+                    {
+                        _billboardText.color = Color.green;
+                        _billboardText.text = successMessage;
+                        reward.Give();
+                    }
+                
+                    // Rewards billboard
+                    var rewardBillboard = Instantiate(billboard, _billboardInstance.transform.position, Quaternion.identity);
+                    rewardBillboard.AddComponent<RewardBillboard>();
+                    var text = rewardBillboard.GetComponent<TextMeshPro>();
+                    text.text = "<color=#66FF66>TODO reward amount</color>";
                 }
             }
             else
