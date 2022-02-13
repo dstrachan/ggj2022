@@ -83,6 +83,12 @@ MonoBehaviour:
   cost: 0
   rewards:
   - type: 0
+    value: 7
+  - type: 2
+    value: 5
+  - type: 3
+    value: 5
+  - type: 4
     value: 5
   durationInHours: 4
   failureCooldownInHours: 0

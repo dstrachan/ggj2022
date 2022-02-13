@@ -12,6 +12,7 @@
     public const string JobRequires = "JobRequires";
     public const string JobReward = "JobReward";
     public const string JobAcceptText = "JobAcceptText";
+    public const string NoShader = "NoShader";
     public const string Home = "Home";
     public const string FadeToBlack = "FadeToBlack";
     public const string Wife = "Wife";

@@ -5,7 +5,7 @@ namespace Model
 {
     public class Time
     {
-        public static readonly DateTime FirstDay = new(2000, 1, 1, 8, 0, 0);
+        public static readonly DateTime FirstDay = new(2022, 1, 30, 8, 0, 0);
 
         private DateTime _prevTime = DateTime.UtcNow;
         private DateTime _gameTime = FirstDay;

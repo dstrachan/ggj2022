@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7192949298377288342}
   - component: {fileID: 9186987873501524552}
   - component: {fileID: 9186987873501524559}
-  - component: {fileID: 9186987873501524553}
   - component: {fileID: 1267706506183203198}
   m_Layer: 0
   m_Name: Job Library
@@ -57,8 +56,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 21.061646, y: 9.344737, z: 38.153473}
-  m_Center: {x: 6.802845, y: 2.172367, z: 1.9839706}
+  m_Size: {x: 17.683868, y: 9.344737, z: 35.73752}
+  m_Center: {x: -1.8261452, y: 2.172367, z: 0.77599335}
 --- !u!114 &7192949298377288342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,10 +81,10 @@ MonoBehaviour:
   successMessage: You read a book
   failureMessage: 
   JobActionText: Read a book
-  cost: 3
+  cost: 5
   rewards:
   - type: 3
-    value: 15
+    value: 60
   durationInHours: 2
   failureCooldownInHours: 0
   unlockRequirements: []
@@ -112,7 +111,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 14.275642
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -203,18 +202,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 701475ce98fe699469c6b2eaf275a10d, type: 3}
   Cooldown: 5
   ScaleTime: 0.5
---- !u!114 &9186987873501524553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7192949298377288341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 447875cadfb1d024893e3d27da9bf90a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1267706506183203198
 MonoBehaviour:
   m_ObjectHideFlags: 0

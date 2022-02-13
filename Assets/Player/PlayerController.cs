@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -6,7 +8,10 @@ namespace Player
     public class PlayerController : MonoBehaviour
     {
         public float speed;
-
+        
+        private List<Shader> oldShaders = new List<Shader>();
+        private bool shaderApplied = false;
+        
         private CharacterController _controller;
         private Camera _mainCamera;
         private Vector3 _moveDirection = Vector3.zero;
@@ -16,7 +21,50 @@ namespace Player
         {
             _controller = GetComponent<CharacterController>();
             _mainCamera = Camera.main;
+            
+            foreach (var item in GetComponentsInChildren<Renderer>())
+            {
+                oldShaders.Add(item.material.shader);
+            }
         }
+
+        // private void FixedUpdate()
+        // {
+        //     var camPosition = _mainCamera.transform.position;
+        //     var rayPlayer = new Ray(camPosition, transform.position - camPosition);
+        //     if (Physics.Raycast(rayPlayer, out var firstHit))
+        //     {
+        //         if (!firstHit.collider.CompareTag(Tags.Player))
+        //         {
+        //             if (!shaderApplied)
+        //             {
+        //                 shaderApplied = true;
+        //                 var items = GetComponentsInChildren<Renderer>();
+        //                 for (var i = 0; i < items.Length; ++i)
+        //                 {
+        //                     if(items[i].CompareTag(Tags.NoShader)) continue;
+        //                     
+        //                     items[i].material.shader = Shader.Find("HighlightEffect");
+        //                 }
+        //             }
+        //         }
+        //         else
+        //         {
+        //             if (shaderApplied)
+        //             {
+        //                 shaderApplied = false;
+        //                 var items = GetComponentsInChildren<Renderer>();
+        //                 
+        //                 for (var i = 0; i < items.Length; ++i)
+        //                 {
+        //                     if(items[i].CompareTag(Tags.NoShader)) continue;
+        //                     
+        //                     items[i].material.shader = oldShaders[i];
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         void Update()
         {
@@ -67,12 +115,14 @@ namespace Player
                     var inputModifyFactor = (inputX != 0.0f && inputY != 0.0f) ? .7071f : 1.0f;
 
                     var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+
                     var hits = Physics.RaycastAll(ray);
                     Vector3 groundHit = transform.position;
                     if (hits.Any())
                     {
                         foreach (var hit in hits)
                         {
+                            
                             if (hit.collider.CompareTag(Tags.Ground))
                             {
                                 groundHit = hit.point;
@@ -82,12 +132,13 @@ namespace Player
                             }
                         }
                     }
+                    
 
                     _moveDirection = new Vector3(inputX * inputModifyFactor, -1, inputY * inputModifyFactor);
                     _moveDirection = transform.TransformDirection(_moveDirection) * speed;
 
                     // Dont move too close to target and go crazy
-                    if (Vector3.Distance(groundHit, transform.position) > 1.2f)
+                    if (Vector3.Distance(groundHit, transform.position) > 1.6f)
                     {
                         _controller.Move(_moveDirection * Time.deltaTime);
                     }
