@@ -11,6 +11,6 @@ public class DaySetter : MonoBehaviour
 
     private void OnGUI()
     {
-        dayValue.text = $"Day {GameState.Instance.Days.Value + 1:n0}\n{GameState.Instance.Time.Value:d}";
+        dayValue.text = $"Day {GameState.Instance.Days + 1:n0}\n{GameState.Instance.Time:d}";
     }
 }

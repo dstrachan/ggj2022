@@ -11,7 +11,7 @@ namespace Clock
         
         private void Update()
         {
-            var currentTime = GameState.Instance.Time.Value;
+            var currentTime = GameState.Instance.Time;
 
             // if (GameState.Instance.Time.Factor > 360)
             // {

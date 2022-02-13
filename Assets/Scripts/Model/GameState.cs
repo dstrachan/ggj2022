@@ -10,52 +10,46 @@ namespace Model
 {
     public class GameState
     {
-        private static readonly Lazy<GameState> Lazy = new(Load);
+        private readonly Dictionary<SkillEnum, Skill> _skills;
+        
+        [JsonIgnore] public Skill Strength => _skills[SkillEnum.Strength];
+        [JsonIgnore] public Skill Intelligence => _skills[SkillEnum.Intelligence];
+        [JsonIgnore] public Skill Charisma => _skills[SkillEnum.Charisma];
+        
+        public static readonly DateTime GameStartTime = new(2022, 1, 30, 8, 0, 0);
 
-        private readonly Dictionary<SkillEnum, Skill> _skills = new()
-        {
-            [SkillEnum.Strength] = new Skill(),
-            [SkillEnum.Intelligence] = new Skill(),
-            [SkillEnum.Charisma] = new Skill(),
-        };
-
-        [JsonIgnore]
-        public Time Time { get; } = new();
-
-        public Watchable<int> Days { get; } = new();
-        public Skill Strength => _skills[SkillEnum.Strength];
-        public Skill Intelligence => _skills[SkillEnum.Intelligence];
-        public Skill Charisma => _skills[SkillEnum.Charisma];
+        public DateTime Time { get; set; }
+        
+        // Rate of time compared to real time (higher is faster). 
+        public float TimeSpeed { get; set; }
+        
         public long Money { get; set; }
+        
         public int Family { get; set; }
+        public int Days => (Time - GameStartTime).Days;
 
         private static readonly string DataFile = $"{Application.persistentDataPath}/data.json";
 
-        public static GameState Instance => Lazy.Value;
+        // Global instance of the game state
+        public static GameState Instance;
 
-        private GameState()
+        static GameState()
         {
-            Time.Reset();
-            Days.Reset();
-            Strength.Reset();
-            Intelligence.Reset();
-            Charisma.Reset();
-            Money = 500;
-            Family = 50;
-        }
-
-        public void Reset()
-        {
-            Time.Reset();
-            Days.Reset();
-            Strength.Reset();
-            Intelligence.Reset();
-            Charisma.Reset();
-            Money = 500;
-            Family = 50;
-
-            Save();
             Load();
+        }
+        
+        public GameState()
+        {
+            _skills = new()
+            {
+                [SkillEnum.Strength] = new Skill(),
+                [SkillEnum.Intelligence] = new Skill(),
+                [SkillEnum.Charisma] = new Skill(),
+            };
+            Time = GameStartTime;
+            TimeSpeed = 1;
+            Money = 500;
+            Family = 50;
         }
 
         public static void DeleteSaveFile()
@@ -71,34 +65,33 @@ namespace Model
             return File.Exists(DataFile);
         }
 
+        // Load and set GameState.Instance. If no save file exists, a new
+        // Game state is used.
         private static GameState Load()
         {
-            GameState gameState = null;
             if (File.Exists(DataFile))
             {
                 var json = File.ReadAllText(DataFile);
                 try
                 {
-                    gameState = JsonConvert.DeserializeObject<GameState>(json);
-                    if (gameState.Days.Value > 0)
-                    {
-                        gameState.Time.SetDays(gameState.Days.Value);
-                    }
+                    Instance = JsonConvert.DeserializeObject<GameState>(json);
                 }
                 catch
                 {
-                    // ignored
+                    Reset();
                 }
             }
+            else
+            {
+                Reset();
+            }
 
-            gameState ??= new GameState();
-            gameState.InitEvents();
-            return gameState;
+            return Instance;
         }
 
-        private void InitEvents()
+        public static void Reset()
         {
-            Days.PropertyChanged += (_, _) => Save();
+            Instance = new GameState();
         }
 
         // TODO: Save at start of new day

@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("JoyJump"))
+        if (Input.GetButtonDown("Action"))
         {
             Continue();
         }
@@ -37,7 +37,7 @@ public class MainMenu : MonoBehaviour
 
     private void NewGame()
     {
-        GameState.Instance.Reset();
+        GameState.Reset();
         LoadCity();
     }
 

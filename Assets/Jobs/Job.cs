@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 namespace Jobs
 {
-    [RequireComponent(typeof(TimeWarp))]
     [RequireComponent(typeof(Collider))]
     public class Job : MonoBehaviour
     {
@@ -38,10 +37,12 @@ namespace Jobs
         public JobRequirement[] successRequirements;
 
         public GameObject billboard;
+
+        public GameManager _gameManager;
         
-        private bool IsEnabled => GameState.Money >= cost && _disabledUntil <= GameState.Time.Value;
+        private bool IsEnabled => GameState.Money >= cost && _disabledUntil <= GameState.Time;
         private bool IsTooExpensive => GameState.Money < cost;
-        private bool IsDisabled => _disabledUntil > GameState.Time.Value;
+        private bool IsDisabled => _disabledUntil > GameState.Time;
         
         private bool IsUnlocked => unlockRequirements.All(x => x.IsMet());
 
@@ -62,7 +63,6 @@ namespace Jobs
 
         private bool _activeJob = false;
         
-        private TimeWarp _timeWarp;
         private DateTime _jobStartTime = DateTime.MaxValue;
         private bool _jobStarted = false;
         private bool firstTime = true;
@@ -76,8 +76,7 @@ namespace Jobs
             _jobRequiresMesh = GameObject.FindGameObjectWithTag(Tags.JobRequires).GetComponent<TextMeshProUGUI>();
             _jobRewardMesh = GameObject.FindGameObjectWithTag(Tags.JobReward).GetComponent<TextMeshProUGUI>();
             _jobAcceptTextMesh = GameObject.FindGameObjectWithTag(Tags.JobAcceptText).GetComponent<TextMeshProUGUI>();
-       
-            _timeWarp = GetComponent<TimeWarp>();
+            _gameManager = GameObject.FindGameObjectWithTag(Tags.GameManager).GetComponent<GameManager>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -111,7 +110,7 @@ namespace Jobs
                     _jobContentMesh.text = DisabledDescription;
                 }
 
-                var lockedTime = (_disabledUntil - GameState.Time.Value);
+                var lockedTime = (_disabledUntil - GameState.Time);
                 _jobAcceptTextMesh.text =
                     $"<color=#d43131><b>Job available in: {lockedTime.TotalHours.ToString("F1")} hours</b></color>";
             }
@@ -191,19 +190,19 @@ namespace Jobs
             
             if (_activeJob)
             {
-                _acceptPanel.gameObject.SetActive(_inTrigger && !TimeWarp.TimeIsWarping);
-                _acceptButton.gameObject.SetActive(_canStartJob && !IsDisabled && !TimeWarp.TimeIsWarping);
-                _jobAcceptTextMesh.gameObject.SetActive(IsDisabled || !_canStartJob && !TimeWarp.TimeIsWarping);
+                _acceptPanel.gameObject.SetActive(_inTrigger && !_gameManager.TimeIsWarping);
+                _acceptButton.gameObject.SetActive(_canStartJob && !IsDisabled && !_gameManager.TimeIsWarping);
+                _jobAcceptTextMesh.gameObject.SetActive(IsDisabled || !_canStartJob && !_gameManager.TimeIsWarping);
 
                 if (_billboardText != null && _jobStarted && _canStartJob &&
-                    _jobStartTime + TimeSpan.FromHours(durationInHours) < GameState.Instance.Time.Value)
+                    _jobStartTime + TimeSpan.FromHours(durationInHours) < GameState.Instance.Time)
                 {
                     _jobStarted = false;
                     UpdateBillboard();
                     UpdateJobBoard();
                 }
 
-                if (!_jobStarted && _canStartJob && Input.GetButtonDown("JoyJump"))
+                if (!_jobStarted && _canStartJob && Input.GetButtonDown("Action"))
                 {
                     Attempt();
                 }
@@ -226,16 +225,16 @@ namespace Jobs
 
         private void Attempt()
         {
-            if (TimeWarp.TimeIsWarping) return;
+            if (_gameManager.TimeIsWarping) return;
             
             if (!IsEnabled) return; 
 
             GameState.Money -= cost;
 
             _jobStarted = true;
-            _jobStartTime = GameState.Instance.Time.Value;
+            _jobStartTime = GameState.Instance.Time;
             
-            _timeWarp.SkipTimeForDuration(TimeSpan.FromHours(durationInHours));
+            _gameManager.WarpTo(TimeSpan.FromHours(durationInHours));
 
             var success = successRequirements.All(x => x.Attempt());
             if (success)
@@ -251,7 +250,7 @@ namespace Jobs
             {
                 _billboardText.color = Color.red;
                 _billboardText.text = failureMessage;
-                _disabledUntil = GameState.Time.Value.Add(TimeSpan.FromHours(failureCooldownInHours));
+                _disabledUntil = GameState.Time.Add(TimeSpan.FromHours(failureCooldownInHours));
             }
         }
     }
