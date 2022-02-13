@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     {
         if (TimeIsWarping)
         {
-            Debug.LogError("WarpTo() was called while alrady warping. Warping to later of the 2 times");
+            Debug.LogError("WarpTo() was called while already warping. Warping to later of the 2 times");
         }
         if (timeToWarpTo < GameState.Instance.Time)
         {
