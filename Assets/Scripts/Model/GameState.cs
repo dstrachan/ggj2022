@@ -31,8 +31,13 @@ namespace Model
         private static readonly string DataFile = $"{Application.persistentDataPath}/data.json";
 
         // Global instance of the game state
-        public static GameState Instance = new GameState();
+        public static GameState Instance;
 
+        static GameState()
+        {
+            Load();
+        }
+        
         public GameState()
         {
             _skills = new()

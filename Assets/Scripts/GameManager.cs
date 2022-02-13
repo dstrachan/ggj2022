@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     {
         if (TimeIsWarping)
         {
-            Debug.LogWarning("WarpTo() was called while alrady warping. Warping to later of the 2 times");
+            Debug.LogError("WarpTo() was called while alrady warping. Warping to later of the 2 times");
         }
         if (timeToWarpTo < GameState.Instance.Time)
         {
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         GameState.Instance.TimeSpeed = WarpSpeed;
         TimeToWarpTo = timeToWarpTo;
     }
-    
+
     void FixedUpdate()
     {
         var gs = GameState.Instance;
@@ -38,9 +38,13 @@ public class GameManager : MonoBehaviour
             var newTime = gs.Time + TimeSpan.FromSeconds(Time.deltaTime * gs.TimeSpeed);
             if (TimeToWarpTo != null && newTime > TimeToWarpTo.Value)
             {
+                // Stop the time warp
                 gs.Time = TimeToWarpTo.Value;
                 TimeToWarpTo = null;
                 GameState.Instance.TimeSpeed = 1;
+                
+                // We save after every time warp
+                GameState.Instance.Save();
             }
             else
             {
