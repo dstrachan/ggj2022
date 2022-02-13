@@ -3,6 +3,7 @@
     public const string Ground = "Ground";
     public const string Player = "Player";
     public const string Camera = "Camera";
+    public const string ControlDirection = "ControlDirection";
     public const string GameManager = "GameManager";
     public const string Job = "Job";
     public const string JobAccept = "JobAccept";

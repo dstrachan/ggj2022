@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7192949298377288342}
   - component: {fileID: 9186987873501524552}
   - component: {fileID: 9186987873501524559}
-  - component: {fileID: 1267706506183203198}
   m_Layer: 0
   m_Name: Job Library
   m_TagString: Job
@@ -90,6 +89,7 @@ MonoBehaviour:
   unlockRequirements: []
   successRequirements: []
   billboard: {fileID: 5113225579227784660, guid: dc5f628d2b35f6f4cad356586111f328, type: 3}
+  _gameManager: {fileID: 0}
 --- !u!82 &9186987873501524552
 AudioSource:
   m_ObjectHideFlags: 0
@@ -202,16 +202,3 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 701475ce98fe699469c6b2eaf275a10d, type: 3}
   Cooldown: 5
   ScaleTime: 0.5
---- !u!114 &1267706506183203198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7192949298377288341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531c4703a43345cebf56905f6f65d427, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  warpSpeed: 3600

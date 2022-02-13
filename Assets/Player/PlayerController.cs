@@ -11,17 +11,19 @@ namespace Player
         
         private List<Shader> oldShaders = new List<Shader>();
         private bool shaderApplied = false;
-        
+        private bool limitDiagonalSpeed = true;
         private CharacterController _controller;
         private Camera _mainCamera;
         private Vector3 _moveDirection = Vector3.zero;
         private GameManager _gameManager;
+        private Transform _controlDirection;
 
         void Start()
         {
             _controller = GetComponent<CharacterController>();
             _mainCamera = Camera.main;
             _gameManager = GameObject.FindGameObjectWithTag(Tags.GameManager).GetComponent<GameManager>();
+            _controlDirection = GameObject.FindGameObjectWithTag(Tags.ControlDirection).GetComponent<Transform>();
 
             foreach (var item in GetComponentsInChildren<Renderer>())
             {
@@ -75,36 +77,26 @@ namespace Player
                 {
                     var inputMoveX = Input.GetAxis("MoveHorizontal");
                     var inputMoveY = Input.GetAxis("MoveVertical");
+                    
+  
                     var action = Input.GetButton("Action");
                     
                     // Movement direction Depends on camera angle
-                    var cameraForward = Camera.main.transform.forward;
-                    var dirForward = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
-                    var dirRight = Vector3.Cross(dirForward, Vector3.down);
-
+                   // var cameraForward = Camera.main.transform.forward;
+           
                     // Movement
-                    _moveDirection = ((dirRight * inputMoveX) + (dirForward * inputMoveY)) * speed;
-                    _controller.Move(_moveDirection * Time.deltaTime);
+                    _moveDirection = ((_controlDirection.right * inputMoveX) + (_controlDirection.forward * inputMoveY));
+
+                    _controller.Move(_moveDirection * speed * Time.deltaTime);
+                    
 
                     // Facing
                     // TODO face second joy stick direction if using joy pad.
                     if (_moveDirection != Vector3.zero)
-                        transform.LookAt(transform.position + _moveDirection);
-                    
-                    // What are we mousing over?
-                    var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                    var hits = Physics.RaycastAll(ray);
-                    Vector3 groundHit = transform.position;
-                    foreach (var hit in hits)
                     {
-                        if (hit.collider.CompareTag(Tags.Ground))
-                        {
-                            groundHit = hit.point;
-                            var transform1 = transform;
-                            transform.LookAt(new Vector3(hit.point.x, transform1.position.y, hit.point.z));
-                            break;
-                        }
+                        transform.LookAt(transform.position + _moveDirection);
                     }
+
                 }
             }
         }

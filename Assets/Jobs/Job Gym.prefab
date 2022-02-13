@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3156842408212995728}
   - component: {fileID: 3991204105856075342}
   - component: {fileID: 3991204105856075337}
-  - component: {fileID: 6452227178435227000}
   m_Layer: 0
   m_Name: Job Gym
   m_TagString: Job
@@ -89,6 +88,7 @@ MonoBehaviour:
   unlockRequirements: []
   successRequirements: []
   billboard: {fileID: 5113225579227784660, guid: dc5f628d2b35f6f4cad356586111f328, type: 3}
+  _gameManager: {fileID: 0}
 --- !u!82 &3991204105856075342
 AudioSource:
   m_ObjectHideFlags: 0
@@ -203,16 +203,3 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1c1fa0bfc16e7a0469576ba8058cdcc5, type: 3}
   Cooldown: 5
   ScaleTime: 0.5
---- !u!114 &6452227178435227000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3156842408212995731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531c4703a43345cebf56905f6f65d427, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  warpSpeed: 3600

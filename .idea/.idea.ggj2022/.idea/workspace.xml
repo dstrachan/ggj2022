@@ -6,7 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="78f27fc7-b341-4606-8f16-69f790269e87" name="Changes" comment="make clock look better">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ggj2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ggj2022/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jobs/Dealer 3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jobs/Dealer 3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jobs/Dealer Meth.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jobs/Dealer Meth.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jobs/Grocery.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jobs/Grocery.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jobs/Job Gym.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jobs/Job Gym.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jobs/Job Library.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jobs/Job Library.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jobs/Job University.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jobs/Job University.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jobs/JobGuy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jobs/JobGuy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainCityScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainCityScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tags.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tags.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
@@ -27,11 +36,19 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Jobs/Job.cs.meta" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Jobs/Job.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Jobs/Job.cs.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/InputModules/StandaloneInputModule.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Scenes/MainCityScene.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Jobs/Job.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Scripts/TimeWarp.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Michael/Documents/unity/ggj2022/Assets/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="253muA1msjbhBRCFXhAaAGwOpBU" />
   <component name="ProjectViewState">
@@ -140,6 +157,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />

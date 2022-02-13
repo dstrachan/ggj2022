@@ -18,6 +18,8 @@ TagManager:
   - JobAcceptText
   - Wife
   - NoShader
+  - ControlDirection
+  - GameManager
   layers:
   - Default
   - TransparentFX
