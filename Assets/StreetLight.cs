@@ -16,7 +16,7 @@ public class StreetLight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameState.Instance.Time.Value.Hour is >= 17 or < 7)
+        if (GameState.Instance.Time.Hour is >= 17 or < 7)
         {
             _light.enabled = true;
         }

@@ -12,7 +12,7 @@ namespace Expenses
         // and the full list of expenses including new expenses (you should show this to the player as a breakdown).
         public static List<Expense> GetExpenses()
         {
-            var day = GameState.Instance.Days.Value;
+            var day = GameState.Instance.Days;
 
             // TODO
             // int gameStateDay = GameState.Instance.Day;

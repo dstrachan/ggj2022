@@ -15,13 +15,14 @@ namespace Player
         private CharacterController _controller;
         private Camera _mainCamera;
         private Vector3 _moveDirection = Vector3.zero;
-        private bool _usingJoyPad = true;
+        private GameManager _gameManager;
 
         void Start()
         {
             _controller = GetComponent<CharacterController>();
             _mainCamera = Camera.main;
-            
+            _gameManager = GameObject.FindGameObjectWithTag(Tags.GameManager).GetComponent<GameManager>();
+
             foreach (var item in GetComponentsInChildren<Renderer>())
             {
                 oldShaders.Add(item.material.shader);
@@ -68,7 +69,7 @@ namespace Player
 
         void Update()
         {
-            if (!TimeWarp.TimeIsWarping)
+            if (!_gameManager.TimeIsWarping)
             {
                 if (Camera.main != null)
                 {

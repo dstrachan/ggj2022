@@ -46,7 +46,7 @@ public class DayNight : MonoBehaviour
         
         RenderSettings.fogDensity = fogDensityCurve.Evaluate(dotDayTime) * fogScale;
 
-        var currentTime = GameState.Instance.Time.Value;
+        var currentTime = GameState.Instance.Time;
 
         var position = transform.position;
         

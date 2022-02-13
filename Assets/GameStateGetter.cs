@@ -9,7 +9,7 @@ public class GameStateGetter : MonoBehaviour
 
     public void SetTime(float factorValue)
     {
-        GameState.Instance.Time.Factor = factorValue;
+        GameState.Instance.TimeSpeed = factorValue;
     }
     
     void Update()

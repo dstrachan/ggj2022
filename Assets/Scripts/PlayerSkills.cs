@@ -26,22 +26,19 @@ public class PlayerSkills : MonoBehaviour
         strengthButton.onClick.AddListener(() =>
         {
             GameState.Strength.Xp += 10;
-            GameState.Days.Value++;
         });
         intelligenceButton.onClick.AddListener(() =>
         {
             GameState.Intelligence.Xp += 10;
-            GameState.Days.Value++;
         });
         charismaButton.onClick.AddListener(() =>
         {
             GameState.Charisma.Xp += 10;
-            GameState.Days.Value++;
         });
 
-        gameSpeedSlider.onValueChanged.AddListener(value => GameState.Time.Factor = value);
+        gameSpeedSlider.onValueChanged.AddListener(value => GameState.TimeSpeed = value);
 
-        resetButton.onClick.AddListener(() => GameState.Reset());
+        resetButton.onClick.AddListener(() => Model.GameState.Reset());
     }
 
     private void OnGUI()
