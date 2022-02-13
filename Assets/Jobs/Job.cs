@@ -4,7 +4,6 @@ using Model;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace Jobs
 {
@@ -12,6 +11,8 @@ namespace Jobs
     [RequireComponent(typeof(Collider))]
     public class Job : MonoBehaviour
     {
+        private static GameState GameState => GameState.Instance;
+        
         public string JobTitle;
         
         [TextArea(4,10)]
@@ -251,61 +252,6 @@ namespace Jobs
                 _billboardText.color = Color.red;
                 _billboardText.text = failureMessage;
                 _disabledUntil = GameState.Time.Value.Add(TimeSpan.FromHours(failureCooldownInHours));
-            }
-        }
-
-        private static GameState GameState => GameState.Instance;
-    }
-
-    [Serializable]
-    public class JobRequirement
-    {
-        public SkillEnum skill;
-        public int value;
-
-        private static GameState GameState => GameState.Instance;
-
-        private static Skill GetSkill(SkillEnum skillEnum) => skillEnum switch
-        {
-            SkillEnum.Strength => GameState.Strength,
-            SkillEnum.Intelligence => GameState.Intelligence,
-            SkillEnum.Charisma => GameState.Charisma,
-            _ => throw new ArgumentOutOfRangeException(),
-        };
-
-        public bool IsMet() => GetSkill(skill).Value >= value;
-        public bool Attempt() => Random.Range(0, 100) < GetSkill(skill).Value / value * 100;
-    }
-
-    [Serializable]
-    public class JobReward
-    {
-        public RewardType type;
-        public int value;
-
-        private static GameState GameState => GameState.Instance;
-
-        public void Give()
-        {
-            switch (type)
-            {
-                case RewardType.Money:
-                    GameState.Money += value;
-                    break;
-                case RewardType.Family:
-                    GameState.Family += value;
-                    break;
-                case RewardType.StrengthXp:
-                    GameState.Strength.Xp += value;
-                    break;
-                case RewardType.IntelligenceXp:
-                    GameState.Intelligence.Xp += value;
-                    break;
-                case RewardType.CharismaXp:
-                    GameState.Charisma.Xp += value;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
     }
